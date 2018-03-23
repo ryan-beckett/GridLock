@@ -1,0 +1,37 @@
+<div style="text-align: center;"><h3>ManageDCI Assets</h3></div>
+<br/><br/>
+<div class="container-fluid">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Model</th>
+      <th>Description</th>
+      <th>Asset Type</th>
+      <th>Asset Status</th>
+      <th>Serial #</th>
+      <th>Part #</th>
+      <th>Purchase Order #</th>
+      <th>Cost</th>
+      <th>Room</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let asset of assets$">
+      <td>{{ asset.id }}</td>
+      <td>{{ asset.name }}</td>
+      <td>{{ asset.model }}</td>
+      <td>{{ asset.description }}</td>
+      <td>{{ asset.type }}</td>
+      <td>{{ asset.status }}</td>
+      <td>{{ asset.serial }}</td>
+      <td>{{ asset.partNumber }}</td>
+      <td>{{ asset.purchaseOrderNumber }}</td>
+      <td>{{ asset.cost }}</td>
+      <td>{{ asset.room["name"] }}</td>
+    </tr>
+    </tbody>
+  </table>
+  <ng-template #noData>No Data Available</ng-template>
+</div>
