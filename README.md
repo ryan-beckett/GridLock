@@ -22,5 +22,4 @@ Coming soon!
 ## Platform
 GridLock is built upon a Spring MVC 5 back-end and AngularJS 5 front-end. You can choose whatever database you like, as the platform 
 can be configured for all of them! GridLock is secure. Options include built-in database authentication, OAuth, and MS Active Directory. 
-Power monitoring integrates with popular providers, such as Geist Open API. 
-See [GridLock-Front-End](https://github.com/ryan-beckett/GridLock-Front-End).
+Power monitoring integrates with popular providers, such as Geist Open API.
