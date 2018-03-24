@@ -3,15 +3,15 @@ export class Asset {
   purchaseOrderNumber: string;
   name: string;
   serial: string;
-  //manufacturer: Manufacturer;
+  manufacturer: object;
   model: string;
   partNumber: string;
   description: string;
-  //location: Location;
-  //room:Room;
+  location: object;
+  room: object;
   type: string;
   status: string;
-  //owner: BusinessUnit;
-  //serviceContract: ServiceContract;
+  owner: object;
+  serviceContract: object;
   cost: number
 }
