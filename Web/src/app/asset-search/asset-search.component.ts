@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-asset-search',
@@ -8,16 +9,20 @@ import { Component, OnInit } from '@angular/core';
 
 export class AssetSearchComponent implements OnInit {
 
-  searchField: string;
-  searchValue: string;
+  searchName: string;
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
+    this.searchName = "";
   }
 
   search() : void {
-    alert(this.searchField+" - "+this.searchValue);
+    if (this.searchName == "")
+      alert("Please enter some search text.");
+    else {
+      this.router.navigate(['/asset-table', "name", this.searchName]);
+    }
   }
 }

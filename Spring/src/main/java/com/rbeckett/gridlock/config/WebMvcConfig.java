@@ -8,12 +8,22 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.rbeckett.gridlock.services;
+package com.rbeckett.gridlock.config;
 
-import com.rbeckett.gridlock.model.asset.Asset;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import java.util.Set;
+@Configuration
+@EnableWebMvc
+public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
-public interface AssetService extends BaseService<Asset> {
-    Set<Asset> findByNameIgnoreCaseContaining(String name);
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/api/**")
+                .allowedOrigins("http://localhost:4200")
+                .allowedMethods("PUT", "DELETE", "POST", "GET")
+                .allowCredentials(false).maxAge(3600);
+    }
 }

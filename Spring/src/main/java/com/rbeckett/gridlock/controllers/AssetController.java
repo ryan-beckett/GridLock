@@ -42,13 +42,23 @@ class AssetController {
         }
     }
 
-    @GetMapping("/assets/{id}")
+    @GetMapping("/assets/id/{id}")
     public ResponseEntity getAssetById(@PathVariable Long id) {
         try {
             return new ResponseEntity<>(assetService.findById(id), HttpStatus.OK);
         } catch (DataAccessException ex) {
             log.debug(ex.getMessage());
             return new ResponseEntity<>("No asset with id = '" + id + "' could be found.", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/assets/name/{name}")
+    public Set<Asset> getAssetsByName(@PathVariable String name) {
+        try {
+            return assetService.findByNameIgnoreCaseContaining(name);
+        } catch (DataAccessException ex) {
+            log.debug(ex.getMessage());
+            return null;
         }
     }
 
@@ -63,7 +73,7 @@ class AssetController {
         }
     }
 
-    @DeleteMapping("/assets/{id}")
+    @DeleteMapping("/assets/id/{id}")
     public ResponseEntity deleteAsset(@PathVariable Long id) {
         try {
             assetService.deleteById(id);
@@ -74,7 +84,7 @@ class AssetController {
         }
     }
 
-    @PutMapping("/assets/{id}")
+    @PutMapping("/assets/id/{id}")
     public ResponseEntity updateAsset(@PathVariable Long id, @RequestBody Asset asset) {
         try {
             assetService.save(asset);

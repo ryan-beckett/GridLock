@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 import {Asset} from "./asset";
+import {AssetService} from "./asset.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-asset',
@@ -12,12 +13,19 @@ export class AssetComponent implements OnInit {
 
   asset: Asset;
 
-  constructor(private http: HttpClient) {
-
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private assetService: AssetService) {
+    this.route.params.subscribe(params => {
+      const id = params['id'];
+      if (id) {
+        this.assetService.getAssetById(id).subscribe(data => {
+          this.asset = data as Asset;
+        });
+      }
+    });
   }
 
   ngOnInit() {
-    //this.http.get("http://localhost:8080/api/assets").subscribe(res => this.assets$ = res);
   }
-
 }

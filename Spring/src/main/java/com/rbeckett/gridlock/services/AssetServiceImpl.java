@@ -43,6 +43,13 @@ public class AssetServiceImpl implements AssetService {
     }
 
     @Override
+    public Set<Asset> findByNameIgnoreCaseContaining(String name) {
+        Set<Asset> assets = new HashSet<>();
+        assetRepository.findByNameIgnoreCaseContaining(name).forEach(assets::add);
+        return assets;
+    }
+
+    @Override
     public Asset save(Asset asset) {
         return assetRepository.save(asset);
     }

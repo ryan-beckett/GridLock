@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {Asset} from "../asset/asset";
-import {HttpClient} from "@angular/common/http";
+import {Component, OnInit} from '@angular/core';
+import {AssetService} from "../asset/asset.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 
 @Component({
@@ -10,14 +10,29 @@ import {HttpClient} from "@angular/common/http";
 })
 export class AssetTableComponent implements OnInit {
 
-  assets: Asset[]
+  assets: Array<any>;
+  searchField: string;
+  searchValue: string;
 
-  constructor(private http: HttpClient) {
-
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private assetService: AssetService) {
+    route.params.subscribe(params => {
+      this.searchField = params["field"];
+      this.searchValue = params["value"];
+      switch (this.searchField) {
+        case "name":
+          this.assetService.getAssetsByName(this.searchValue).subscribe(data => {
+            this.assets = data;
+          });
+          break;
+        default:
+          break;
+      }
+    });
   }
 
   ngOnInit() {
 
   }
-
 }
