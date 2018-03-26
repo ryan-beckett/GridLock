@@ -25,4 +25,6 @@ public class UserProfile {
     @NotNull
     @OneToOne
     private User user;
+
+    private String imageURL;
 }

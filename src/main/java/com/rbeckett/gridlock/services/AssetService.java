@@ -15,5 +15,7 @@ import com.rbeckett.gridlock.model.asset.Asset;
 import java.util.Set;
 
 public interface AssetService extends BaseService<Asset> {
-    Set<Asset> findByNameIgnoreCaseContaining(String name);
+    Set<Asset> findByNameIgnoreCaseContainingByOrderByIdAsc(String name);
+
+    Set<Asset> findAllByOrderByIdAsc();
 }

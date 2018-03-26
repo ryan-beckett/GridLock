@@ -14,9 +14,11 @@ import com.rbeckett.gridlock.model.asset.Asset;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import java.util.List;
+import java.util.Set;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 public interface AssetRepository extends CrudRepository<Asset, Long> {
-    List<Asset> findByNameIgnoreCaseContaining(String name);
+    Set<Asset> findByNameIgnoreCaseContainingOrderByIdAsc(String name);
+
+    Set<Asset> findAllByOrderByIdAsc();
 }

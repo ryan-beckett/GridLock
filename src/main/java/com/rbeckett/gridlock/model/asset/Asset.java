@@ -72,4 +72,6 @@ public class Asset {
     protected ServiceContract serviceContract;
 
     protected double cost;
+
+    protected String imageURL;
 }

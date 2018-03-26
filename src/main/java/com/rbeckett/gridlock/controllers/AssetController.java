@@ -35,7 +35,7 @@ class AssetController {
     @GetMapping("/assets")
     public Set<Asset> getAssets() {
         try {
-            return assetService.findAll();
+            return assetService.findAllByOrderByIdAsc();
         } catch (DataAccessException ex) {
             log.debug(ex.getMessage());
             return null;
@@ -55,7 +55,7 @@ class AssetController {
     @GetMapping("/assets/name/{name}")
     public Set<Asset> getAssetsByName(@PathVariable String name) {
         try {
-            return assetService.findByNameIgnoreCaseContaining(name);
+            return assetService.findByNameIgnoreCaseContainingByOrderByIdAsc(name);
         } catch (DataAccessException ex) {
             log.debug(ex.getMessage());
             return null;

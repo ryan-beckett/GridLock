@@ -63,8 +63,14 @@ public class AssetServiceImpl implements AssetService {
     }
 
     @Override
-    public Set<Asset> findByNameIgnoreCaseContaining(String name) {
-        Set<Asset> assets = new HashSet<>(assetRepository.findByNameIgnoreCaseContaining(name));
+    public Set<Asset> findByNameIgnoreCaseContainingByOrderByIdAsc(String name) {
+        Set<Asset> assets = new HashSet<>(assetRepository.findByNameIgnoreCaseContainingOrderByIdAsc(name));
+        return assets;
+    }
+
+    @Override
+    public Set<Asset> findAllByOrderByIdAsc() {
+        Set<Asset> assets = new HashSet<>(assetRepository.findAllByOrderByIdAsc());
         return assets;
     }
 }
