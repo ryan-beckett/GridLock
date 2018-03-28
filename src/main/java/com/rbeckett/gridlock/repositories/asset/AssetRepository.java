@@ -11,7 +11,6 @@
 package com.rbeckett.gridlock.repositories.asset;
 
 import com.rbeckett.gridlock.model.asset.Asset;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Set;
@@ -19,7 +18,4 @@ import java.util.Set;
 public interface AssetRepository extends CrudRepository<Asset, Long> {
     Set<Asset> findByNameIgnoreCaseContainingOrderByIdAsc(String name);
     Set<Asset> findAllByOrderByIdAsc();
-
-    @Query("select a.id, a.name, a.type, a.status, a.manufacturer, a.model, a.location, a.room from Asset a order by a.id asc ")
-    Set<Asset> findAllWithMinimalFields();
 }

@@ -72,8 +72,4 @@ public class AssetServiceImpl implements AssetService {
         return new HashSet<>(assetRepository.findAllByOrderByIdAsc());
     }
 
-    @Override
-    public Set<Asset> findAllWithMinimalFields() {
-        return new HashSet<>(assetRepository.findAllWithMinimalFields());
-    }
 }

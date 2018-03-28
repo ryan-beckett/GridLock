@@ -19,6 +19,4 @@ public interface AssetService extends BaseService<Asset> {
     Set<Asset> findByNameIgnoreCaseContainingByOrderByIdAsc(String name);
 
     Set<Asset> findAllByOrderByIdAsc();
-
-    Set<Asset> findAllWithMinimalFields();
 }

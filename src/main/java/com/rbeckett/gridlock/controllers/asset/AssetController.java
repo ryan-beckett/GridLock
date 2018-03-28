@@ -41,16 +41,6 @@ class AssetController {
         }
     }
 
-    @GetMapping("min")
-    public Set<Asset> getAssetsWithMinimalFields() {
-        try {
-            return assetService.findAllWithMinimalFields();
-        } catch (DataAccessException ex) {
-            log.debug(ex.getMessage());
-            return null;
-        }
-    }
-
     @GetMapping("id/{id}")
     public ResponseEntity getAssetById(@PathVariable Long id) {
         try {
