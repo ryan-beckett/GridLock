@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Set;
 
 @Slf4j
@@ -59,6 +60,11 @@ class AssetController {
             log.debug(ex.getMessage());
             return null;
         }
+    }
+
+    @GetMapping("query")
+    public Set<Asset> getAssetsByQueryParams(HttpServletRequest request) {
+        return assetService.findAllByQueryParams(request.getParameterMap());
     }
 
     @PostMapping(value = "")

@@ -13,10 +13,12 @@ package com.rbeckett.gridlock.services.asset;
 import com.rbeckett.gridlock.model.asset.Asset;
 import com.rbeckett.gridlock.services.BaseService;
 
+import java.util.Map;
 import java.util.Set;
 
 public interface AssetService extends BaseService<Asset> {
     Set<Asset> findByNameIgnoreCaseContainingByOrderByIdAsc(String name);
-
     Set<Asset> findAllByOrderByIdAsc();
+
+    Set<Asset> findAllByQueryParams(Map<String, String[]> parameterMap);
 }
