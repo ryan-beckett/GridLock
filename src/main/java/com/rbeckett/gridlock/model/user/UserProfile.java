@@ -13,7 +13,6 @@ package com.rbeckett.gridlock.model.user;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
@@ -22,7 +21,6 @@ public class UserProfile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
     @OneToOne
     private User user;
 

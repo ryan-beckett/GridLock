@@ -28,6 +28,7 @@ public class Role {
     @NotNull
     private String name;
 
+    @SuppressWarnings("JpaDataSourceORMInspection")
     @NotNull
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "role_permission", joinColumns = @JoinColumn(name = "role_id"),

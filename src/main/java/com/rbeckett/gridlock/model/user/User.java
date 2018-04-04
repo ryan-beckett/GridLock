@@ -50,10 +50,10 @@ public class User {
     @NotNull
     private boolean deleted;
 
-    @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     private UserProfile userProfile;
 
+    @SuppressWarnings("JpaDataSourceORMInspection")
     @NotNull
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),

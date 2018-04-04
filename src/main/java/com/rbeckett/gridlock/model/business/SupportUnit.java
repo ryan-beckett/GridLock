@@ -33,12 +33,14 @@ public class SupportUnit {
     @OneToOne
     private BusinessUnit businessUnit;
 
+    @SuppressWarnings("JpaDataSourceORMInspection")
     @NotNull
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "supportUnit_contact", joinColumns = @JoinColumn(name = "supportUnit_id"),
             inverseJoinColumns = @JoinColumn(name = "contact_id"))
     private Set<Contact> members = new HashSet<>();
 
+    @SuppressWarnings("JpaDataSourceORMInspection")
     @NotNull
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "supportUnit_role", joinColumns = @JoinColumn(name = "supportUnit_id"),

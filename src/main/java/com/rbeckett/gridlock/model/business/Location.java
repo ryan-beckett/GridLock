@@ -35,12 +35,9 @@ public class Location {
     @NotNull
     private String address;
 
-    @NotNull
     private String city;
 
-    @NotNull
     private String state;
 
-    @NotNull
     private String zip;
 }

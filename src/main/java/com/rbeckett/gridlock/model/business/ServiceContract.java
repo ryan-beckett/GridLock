@@ -32,7 +32,6 @@ public class ServiceContract {
     @OneToOne
     private Manufacturer contractor;
 
-    @NotNull
     private LocalDate startDate;
 
     private LocalDate endDate;

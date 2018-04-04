@@ -19,6 +19,7 @@ import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
+@SuppressWarnings({"ALL", "JpaDataSourceORMInspection"})
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
@@ -28,6 +29,7 @@ public class NetworkConfiguration extends Configuration {
 
     private String workGroup;
 
+    @SuppressWarnings("JpaDataSourceORMInspection")
     @NotNull
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "networkConfiguration_networkConnection", joinColumns = @JoinColumn(name = "networkConfiguration_id"),
