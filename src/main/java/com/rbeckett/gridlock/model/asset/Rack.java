@@ -37,4 +37,39 @@ public class Rack extends Asset implements GridAsset {
     public GridLocation getGridLocation() {
         return gridLocation;
     }
+
+    public int totalUSpaceLeft() {
+        int uSpaceLeft = uHeight;
+        for (RackableDevice rackableDevice : devices)
+            uSpaceLeft -= rackableDevice.getUHeight();
+        return uSpaceLeft;
+    }
+
+    public int nextOpenULocation() {
+        for (int i = 1; i < uHeight; i++) {
+            final int j = i;
+            if (!devices.stream().anyMatch(rackableDevice -> rackableDevice.getULocation() == j))
+                return i;
+        }
+        return -1;
+    }
+
+    public int nextOpenULocation(int startULocation) {
+        for (int i = startULocation; i < uHeight; i++) {
+            final int j = i;
+            if (!devices.stream().anyMatch(rackableDevice -> rackableDevice.getULocation() == j))
+                return i;
+        }
+        return -1;
+    }
+
+    public int openSpaceAtULocation(final int uLocation) {
+        int i = uLocation;
+        for (; i < uHeight; i++) {
+            final int j = i;
+            if (devices.stream().anyMatch(rackableDevice -> rackableDevice.getULocation() == j))
+                break;
+        }
+        return i - uLocation;
+    }
 }
