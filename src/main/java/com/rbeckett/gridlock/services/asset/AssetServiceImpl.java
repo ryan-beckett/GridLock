@@ -120,7 +120,7 @@ public class AssetServiceImpl implements AssetService {
             query = query.where(asset.description.likeIgnoreCase(Expressions.asString("%").concat(description).concat("%")));
         String location = parameterMap.get("location")[0];
         if (!location.isEmpty())
-            query = query.where(asset.location.name.likeIgnoreCase(Expressions.asString("%").concat(location).concat("%")));
+            query = query.where(asset.room.site.location.name.likeIgnoreCase(Expressions.asString("%").concat(location).concat("%")));
         String room = parameterMap.get("room")[0];
         if (!room.isEmpty())
             query = query.where(asset.room.name.likeIgnoreCase(Expressions.asString("%").concat(room).concat("%")));

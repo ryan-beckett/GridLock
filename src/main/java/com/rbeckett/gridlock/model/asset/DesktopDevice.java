@@ -13,7 +13,6 @@ package com.rbeckett.gridlock.model.asset;
 import com.rbeckett.gridlock.enums.DesktopDeviceType;
 import com.rbeckett.gridlock.model.business.Contact;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -21,7 +20,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 public class DesktopDevice extends ConfigurableDevice {

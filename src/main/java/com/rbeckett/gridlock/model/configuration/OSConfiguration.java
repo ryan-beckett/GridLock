@@ -11,12 +11,10 @@
 package com.rbeckett.gridlock.model.configuration;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 public class OSConfiguration extends Configuration {

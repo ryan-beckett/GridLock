@@ -12,15 +12,12 @@ package com.rbeckett.gridlock.model.configuration;
 
 import com.rbeckett.gridlock.model.network.NetworkConnection;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
-@SuppressWarnings({"ALL", "JpaDataSourceORMInspection"})
-@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 public class NetworkConfiguration extends Configuration {

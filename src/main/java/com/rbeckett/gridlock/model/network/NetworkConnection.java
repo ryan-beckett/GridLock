@@ -10,15 +10,18 @@
 
 package com.rbeckett.gridlock.model.network;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.rbeckett.gridlock.enums.ConnectionType;
 import com.rbeckett.gridlock.model.configuration.NetworkConfiguration;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
+@EqualsAndHashCode(of = {"id"})
 @Data
 @Entity
 public class NetworkConnection {
@@ -57,6 +60,7 @@ public class NetworkConnection {
     @OneToOne
     private Port targetPort;
 
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "networkConnection", fetch = FetchType.LAZY)
     private Set<Hop> hops = new HashSet<>();
 }

@@ -11,12 +11,14 @@
 package com.rbeckett.gridlock.model.user;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
+@EqualsAndHashCode(of = {"id"})
 @Data
 @Entity
 public class Role {

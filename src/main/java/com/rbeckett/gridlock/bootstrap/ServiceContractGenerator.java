@@ -4,6 +4,7 @@ import com.rbeckett.gridlock.enums.ServiceContractType;
 import com.rbeckett.gridlock.model.business.Manufacturer;
 import com.rbeckett.gridlock.model.business.ServiceContract;
 import com.rbeckett.gridlock.services.business.ServiceContractService;
+import lombok.extern.slf4j.Slf4j;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+@Slf4j
 @Component
 public class ServiceContractGenerator implements Generator<ServiceContract> {
 
@@ -38,6 +40,7 @@ public class ServiceContractGenerator implements Generator<ServiceContract> {
             serviceContract.setContractor((Manufacturer) dataFactory.getItem(generators[0].getResults()));
             serviceContracts.add(serviceContractService.save(serviceContract));
         }
+        log.info("Generated data for ServiceContract entity");
     }
 
     private LocalDate getRandomLocalDate() {

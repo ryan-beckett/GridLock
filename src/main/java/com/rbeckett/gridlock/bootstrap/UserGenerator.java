@@ -4,6 +4,7 @@ import com.rbeckett.gridlock.model.business.BusinessUnit;
 import com.rbeckett.gridlock.model.business.Contact;
 import com.rbeckett.gridlock.model.user.User;
 import com.rbeckett.gridlock.services.user.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Component
 public class UserGenerator implements Generator<User> {
 
@@ -43,6 +45,8 @@ public class UserGenerator implements Generator<User> {
         user.setContact((Contact) dataFactory.getItem(generators[0].getResults()));
         user.setBusinessUnit((BusinessUnit) dataFactory.getItem(generators[1].getResults()));
         users.add(userService.save(user));
+
+        log.info("Generated data for User entity");
     }
 
     @Override

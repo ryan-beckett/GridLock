@@ -10,10 +10,16 @@
 
 package com.rbeckett.gridlock.bootstrap;
 
+import com.rbeckett.gridlock.model.business.Room;
+import com.rbeckett.gridlock.model.network.GridLocation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+
+import java.util.*;
+
+import static com.rbeckett.gridlock.bootstrap.AppDataGeneratorConfig.*;
 
 @Slf4j
 @Component
@@ -22,6 +28,7 @@ class AppDataGenerator implements ApplicationListener<ContextRefreshedEvent> {
     private final LocationGenerator locationGenerator;
     private final UserGenerator userGenerator;
     private final ContactGenerator contactGenerator;
+    private static final Map<Room, List<GridLocation>> roomGridLocationMap = new HashMap<>();
     private final RoomGenerator roomGenerator;
     private final ManufacturerGenerator manufacturerGenerator;
     private final BusinessGenerator businessGenerator;
@@ -41,10 +48,15 @@ class AppDataGenerator implements ApplicationListener<ContextRefreshedEvent> {
     private final ServerDeviceGenerator serverDeviceGenerator;
     private final StorageDeviceGenerator storageDeviceGenerator;
     private final StorageFrameGenerator storageFrameGenerator;
+    private final SiteGenerator siteGenerator;
+    private final NetworkConfigurationGenerator networkConfigurationGenerator;
+    private final OSConfigurationGenerator osConfigurationGenerator;
+    private final HardwareConfigurationGenerator hardwareConfigurationGenerator;
 
     public AppDataGenerator(final LocationGenerator locationGenerator,
                             final UserGenerator userGenerator,
                             final ContactGenerator contactGenerator,
+                            final SiteGenerator siteGenerator,
                             final RoomGenerator roomGenerator,
                             final ManufacturerGenerator manufacturerGenerator,
                             final BusinessGenerator businessGenerator,
@@ -63,10 +75,14 @@ class AppDataGenerator implements ApplicationListener<ContextRefreshedEvent> {
                             final PatchPanelGenerator patchPanelGenerator,
                             final ServerDeviceGenerator serverDevice,
                             final StorageDeviceGenerator storageDevice,
-                            final StorageFrameGenerator storageFrameGenerator) {
+                            final StorageFrameGenerator storageFrameGenerator,
+                            final NetworkConfigurationGenerator networkConfigurationGenerator,
+                            final OSConfigurationGenerator osConfigurationGenerator,
+                            final HardwareConfigurationGenerator hardwareConfigurationGenerator) {
         this.locationGenerator = locationGenerator;
         this.userGenerator = userGenerator;
         this.contactGenerator = contactGenerator;
+        this.siteGenerator = siteGenerator;
         this.roomGenerator = roomGenerator;
         this.manufacturerGenerator = manufacturerGenerator;
         this.businessGenerator = businessGenerator;
@@ -86,42 +102,79 @@ class AppDataGenerator implements ApplicationListener<ContextRefreshedEvent> {
         this.serverDeviceGenerator = serverDevice;
         this.storageDeviceGenerator = storageDevice;
         this.storageFrameGenerator = storageFrameGenerator;
+        this.networkConfigurationGenerator = networkConfigurationGenerator;
+        this.osConfigurationGenerator = osConfigurationGenerator;
+        this.hardwareConfigurationGenerator = hardwareConfigurationGenerator;
+    }
+
+    public static RoomGridLocationPair getNextRandomRoomAndGridLocation() {
+        Random random = new Random();
+        List<Room> rooms = new ArrayList<>(roomGridLocationMap.keySet());
+        while (!isRoomGridLocationMapEmpty()) {
+            Room room = rooms.get(random.nextInt(rooms.size()));
+            List<GridLocation> gridLocations = roomGridLocationMap.get(room);
+            if (!gridLocations.isEmpty()) {
+                GridLocation gridLocation = gridLocations.remove(random.nextInt(gridLocations.size()));
+                return new RoomGridLocationPair(room, gridLocation);
+            }
+        }
+        return null;
+    }
+
+    private static boolean isRoomGridLocationMapEmpty() {
+        for (Room room : roomGridLocationMap.keySet())
+            if (!roomGridLocationMap.get(room).isEmpty())
+                return false;
+        return true;
     }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        locationGenerator.generate(10);
-        contactGenerator.generate(10, locationGenerator);
-        roomGenerator.generate(10, locationGenerator);
-        manufacturerGenerator.generate(10, locationGenerator, contactGenerator);
-        businessGenerator.generate(1, locationGenerator, contactGenerator);
-        businessUnitGenerator.generate(10, contactGenerator, businessGenerator);
-        serviceContractGenerator.generate(10, manufacturerGenerator);
-        supportUnitGenerator.generate(10, contactGenerator, businessUnitGenerator);
-        userGenerator.generate(-1, contactGenerator, businessUnitGenerator);
-        userProfileGenerator.generate(-1, userGenerator);
-        permissionGenerator.generate(-1);
-        roleGenerator.generate(-1, permissionGenerator);
-        gridLocationGenerator.generate(50);
-        rackGenerator.generate(50, locationGenerator, manufacturerGenerator, roomGenerator,
+        locationGenerator.generate(NUM_LOCATIONS);
+        contactGenerator.generate(NUM_CONTACTS, locationGenerator);
+        siteGenerator.generate(NUM_SITES, locationGenerator);
+        roomGenerator.generate(NUM_ROOMS, siteGenerator);
+        manufacturerGenerator.generate(NUM_MANUFACTURERS, locationGenerator, contactGenerator);
+        businessGenerator.generate(NUM_BUSINESSES, locationGenerator, contactGenerator);
+        businessUnitGenerator.generate(NUM_BUSINESS_UNITS, contactGenerator, businessGenerator);
+        serviceContractGenerator.generate(NUM_SERVICE_CONTRACTS, manufacturerGenerator);
+        supportUnitGenerator.generate(NUM_SUPPORT_UNITS, contactGenerator, businessUnitGenerator);
+        userGenerator.generate(NUM_USERS, contactGenerator, businessUnitGenerator);
+        userProfileGenerator.generate(NUM_USER_PROFILES, userGenerator);
+        permissionGenerator.generate(NUM_PERMISSIONS);
+        roleGenerator.generate(NUM_ROLES, permissionGenerator);
+        gridLocationGenerator.generate(NUM_GRID_LOCATIONS);
+        for (Room room : roomGenerator.getResults())
+            roomGridLocationMap.put(room, new ArrayList<>(gridLocationGenerator.getResults()));
+        rackGenerator.generate(NUM_RACKS, locationGenerator, manufacturerGenerator, roomGenerator,
                 businessUnitGenerator, serviceContractGenerator, gridLocationGenerator);
-        desktopDeviceGenerator.generate(50, locationGenerator, manufacturerGenerator, roomGenerator,
+        desktopDeviceGenerator.generate(NUM_DESKTOP_DEVICES, locationGenerator, manufacturerGenerator, roomGenerator,
                 businessUnitGenerator, serviceContractGenerator, contactGenerator);
-        mainFrameGenerator.generate(50, locationGenerator, manufacturerGenerator, roomGenerator,
+        mainFrameGenerator.generate(NUM_MAIN_FRAMES, locationGenerator, manufacturerGenerator, roomGenerator,
                 businessUnitGenerator, serviceContractGenerator, gridLocationGenerator);
-        networkDeviceGenerator.generate(50, locationGenerator, manufacturerGenerator, roomGenerator, businessUnitGenerator,
+        networkDeviceGenerator.generate(NUM_NETWORK_DEVICES, locationGenerator, manufacturerGenerator, roomGenerator, businessUnitGenerator,
                 serviceContractGenerator, rackGenerator);
-        patchPanelGenerator.generate(50, locationGenerator, manufacturerGenerator, roomGenerator, businessUnitGenerator,
+        patchPanelGenerator.generate(NUM_PATCH_PANELS, locationGenerator, manufacturerGenerator, roomGenerator, businessUnitGenerator,
                 serviceContractGenerator, rackGenerator);
-        serverDeviceGenerator.generate(50, locationGenerator, manufacturerGenerator, roomGenerator, businessUnitGenerator,
+        serverDeviceGenerator.generate(NUM_SERVER_DEVICES, locationGenerator, manufacturerGenerator, roomGenerator, businessUnitGenerator,
                 serviceContractGenerator, rackGenerator);
-        storageDeviceGenerator.generate(50, locationGenerator, manufacturerGenerator, roomGenerator, businessUnitGenerator,
+        storageDeviceGenerator.generate(NUM_STORAGE_DEVICES, locationGenerator, manufacturerGenerator, roomGenerator, businessUnitGenerator,
                 serviceContractGenerator, rackGenerator);
-        storageFrameGenerator.generate(50, locationGenerator, manufacturerGenerator, roomGenerator, businessUnitGenerator,
+        storageFrameGenerator.generate(NUM_STORAGE_FRAMES, locationGenerator, manufacturerGenerator, roomGenerator, businessUnitGenerator,
                 serviceContractGenerator, gridLocationGenerator);
-        //networkConfigurationGenerator.generate(350);
-        //networkConnectionGenerator.generate(700, networkConfigurationGenerator);
-        //osConfigurationGenerator.generate(300);
-        //hardwareConfigurationGenerator.generate(300);
+        networkConfigurationGenerator.generate(NUM_NETWORK_CONFIGURATIONS);
+        networkConnectionGenerator.generate(NUM_NETWORK_CONNECTIONS, networkConfigurationGenerator);
+        osConfigurationGenerator.generate(NUM_OS_CONFIGURATIONS);
+        hardwareConfigurationGenerator.generate(NUM_HARDWARE_CONFIGURATIONS);
+    }
+
+    public static final class RoomGridLocationPair {
+        Room room;
+        GridLocation gridLocation;
+
+        public RoomGridLocationPair(final Room room, final GridLocation gridLocation) {
+            this.room = room;
+            this.gridLocation = gridLocation;
+        }
     }
 }

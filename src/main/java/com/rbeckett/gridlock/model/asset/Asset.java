@@ -12,12 +12,17 @@ package com.rbeckett.gridlock.model.asset;
 
 import com.rbeckett.gridlock.enums.AssetStatus;
 import com.rbeckett.gridlock.enums.AssetType;
-import com.rbeckett.gridlock.model.business.*;
+import com.rbeckett.gridlock.model.business.BusinessUnit;
+import com.rbeckett.gridlock.model.business.Manufacturer;
+import com.rbeckett.gridlock.model.business.Room;
+import com.rbeckett.gridlock.model.business.ServiceContract;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@EqualsAndHashCode(of = {"id"})
 @Data
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -47,10 +52,6 @@ public class Asset {
 
     @Lob
     protected String description;
-
-    @NotNull
-    @OneToOne
-    protected Location location;
 
     @NotNull
     @OneToOne

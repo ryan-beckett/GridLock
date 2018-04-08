@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @Slf4j
 @RestController
 @RequestMapping({"/api/main-frames/"})

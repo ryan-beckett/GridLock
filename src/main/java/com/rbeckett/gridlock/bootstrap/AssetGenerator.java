@@ -2,7 +2,10 @@ package com.rbeckett.gridlock.bootstrap;
 
 import com.rbeckett.gridlock.enums.AssetStatus;
 import com.rbeckett.gridlock.model.asset.Asset;
-import com.rbeckett.gridlock.model.business.*;
+import com.rbeckett.gridlock.model.business.BusinessUnit;
+import com.rbeckett.gridlock.model.business.Manufacturer;
+import com.rbeckett.gridlock.model.business.Room;
+import com.rbeckett.gridlock.model.business.ServiceContract;
 import org.fluttercode.datafactory.impl.DataFactory;
 
 import java.util.Random;
@@ -15,12 +18,11 @@ public class AssetGenerator {
     private static final int PO_LEN = 10;
     private static final int SERIAL_LEN = 10;
     private static final int PRT_NUM_LEN = 6;
-    private static int numAssetGenerated;
+    private static int numRacks, numDesktopDevices, numMainFrames, numServerDevices, numStorageFrames,
+            numNetworkDevices, numStorageDevices, numPatchPanels;
 
     protected void generate(Asset asset, Generator... generators) {
-        numAssetGenerated++;
         final Random random = new Random();
-        asset.setLocation((Location) dataFactory.getItem(generators[0].getResults()));
         asset.setManufacturer((Manufacturer) dataFactory.getItem(generators[1].getResults()));
         asset.setRoom((Room) dataFactory.getItem(generators[2].getResults()));
         asset.setOwner((BusinessUnit) dataFactory.getItem(generators[3].getResults()));
@@ -33,27 +35,27 @@ public class AssetGenerator {
         asset.setStatus(dataFactory.getItem(AssetStatus.values()));
         switch (asset.getType()) {
             case RACK:
-                asset.setName("rack-" + numAssetGenerated);
+                asset.setName("rack-" + (++numRacks));
                 break;
             case DESKTOP_DEVICE:
-                asset.setName("desktop-device-" + numAssetGenerated);
+                asset.setName("desktop-device-" + (++numDesktopDevices));
                 break;
             case MAIN_FRAME:
-                asset.setName("main-frame-" + numAssetGenerated);
+                asset.setName("main-frame-" + (++numMainFrames));
                 break;
             case SERVER_DEVICE:
-                asset.setName("server-device-" + numAssetGenerated);
+                asset.setName("server-device-" + (++numServerDevices));
                 break;
             case STORAGE_FRAME:
-                asset.setName("storage-frame-" + numAssetGenerated);
+                asset.setName("storage-frame-" + (++numStorageFrames));
                 break;
             case NETWORK_DEVICE:
-                asset.setName("network-device-" + numAssetGenerated);
+                asset.setName("network-device-" + (++numNetworkDevices));
                 break;
             case STORAGE_DEVICE:
-                asset.setName("storage-device-" + numAssetGenerated);
+                asset.setName("storage-device-" + (++numStorageDevices));
             case PATCH_PANEL:
-                asset.setName("patch-panel-" + numAssetGenerated);
+                asset.setName("patch-panel-" + (++numPatchPanels));
                 break;
         }
     }

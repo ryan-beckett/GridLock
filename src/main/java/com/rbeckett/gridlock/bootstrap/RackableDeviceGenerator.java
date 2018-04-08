@@ -3,38 +3,48 @@ package com.rbeckett.gridlock.bootstrap;
 import com.rbeckett.gridlock.model.asset.Rack;
 import com.rbeckett.gridlock.model.asset.RackableDevice;
 import com.rbeckett.gridlock.services.asset.RackService;
+import lombok.extern.slf4j.Slf4j;
 import org.fluttercode.datafactory.impl.DataFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 public class RackableDeviceGenerator extends AssetGenerator {
 
     private static final DataFactory dataFactory = new DataFactory();
-    private static final Integer[] U_HEIGHTS = {1, 2, 4, 8, 16};
+    private static final Integer[] U_HEIGHTS = {1, 2, 4};
 
     protected void generate(RackableDevice rackableDevice, RackService rackService, Generator... generators) {
         super.generate(rackableDevice, generators);
         rackableDevice.setUHeight(dataFactory.getItem(U_HEIGHTS));
-        List<Rack> racks = (List<Rack>) generators[5].getResults();
-        for (int i = 0; i < racks.size(); i++) {
-            Rack rack = racks.get(i);
-            if (!rack.getDevices().contains(rackableDevice) && rack.totalUSpaceLeft() >= rackableDevice.getUHeight()) {
+        List<Rack> racks = new ArrayList<>((List<Rack>) generators[5].getResults());
+        boolean placed = false;
+        while (!placed && !racks.isEmpty()) {
+            Rack rack = dataFactory.getItem(racks);
+            racks.remove(rack);
+            if (rack.totalUSpaceLeft() >= rackableDevice.getUHeight()) {
                 int uLocation = 1, openSpace;
                 while (uLocation <= rack.getUHeight()) {
                     uLocation = rack.nextOpenULocation(uLocation);
+                    if (uLocation < 0)
+                        break;
                     openSpace = rack.openSpaceAtULocation(uLocation);
                     if (openSpace >= rackableDevice.getUHeight()) {
+                        rackableDevice.setRack(rack);
                         rackableDevice.setULocation(uLocation);
+                        rackableDevice.setGridLocation(rack.getGridLocation());
+                        rackableDevice.setRoom(rack.getRoom());
                         rack.getDevices().add(rackableDevice);
                         rackService.save(rack);
-                        rackableDevice.setRack(rack);
-                        rackableDevice.setGridLocation(rack.getGridLocation());
+                        placed = true;
                         break;
                     }
                     uLocation += openSpace;
                 }
-                break;
             }
         }
+        if (!placed)
+            log.info("Couldn't place rackable device in any rack: {" + rackableDevice.toString() + "}");
     }
 }

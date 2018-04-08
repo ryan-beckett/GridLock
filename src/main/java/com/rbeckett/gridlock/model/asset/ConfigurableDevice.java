@@ -14,11 +14,9 @@ import com.rbeckett.gridlock.model.configuration.HardwareConfiguration;
 import com.rbeckett.gridlock.model.configuration.NetworkConfiguration;
 import com.rbeckett.gridlock.model.configuration.OSConfiguration;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)

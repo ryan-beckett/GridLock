@@ -13,6 +13,7 @@ package com.rbeckett.gridlock.model.user;
 import com.rbeckett.gridlock.model.business.BusinessUnit;
 import com.rbeckett.gridlock.model.business.Contact;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+@EqualsAndHashCode(of = {"id"})
 @SuppressWarnings("JpaDataSourceORMInspection")
 @Data
 @Entity

@@ -4,12 +4,14 @@ import com.rbeckett.gridlock.model.business.Contact;
 import com.rbeckett.gridlock.model.business.Location;
 import com.rbeckett.gridlock.model.business.Manufacturer;
 import com.rbeckett.gridlock.services.business.ManufacturerService;
+import lombok.extern.slf4j.Slf4j;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Component
 public class ManufacturerGenerator implements Generator<Manufacturer> {
 
@@ -28,11 +30,12 @@ public class ManufacturerGenerator implements Generator<Manufacturer> {
     public void generate(final int numResults, final Generator... generators) {
         for (int i = 0; i < numResults; i++) {
             Manufacturer manufacturer = new Manufacturer();
-            manufacturer.setName(dataFactory.getItem(MANUFACTURERS));
+            manufacturer.setName(MANUFACTURERS[i % MANUFACTURERS.length]);
             manufacturer.setLocation((Location) dataFactory.getItem(generators[0].getResults()));
             manufacturer.setContact((Contact) dataFactory.getItem(generators[1].getResults()));
             manufacturers.add(manufacturerService.save(manufacturer));
         }
+        log.info("Generated data for Manufacturer entity");
     }
 
     @Override

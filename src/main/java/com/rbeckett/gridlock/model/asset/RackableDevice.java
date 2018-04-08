@@ -10,18 +10,18 @@
 
 package com.rbeckett.gridlock.model.asset;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.rbeckett.gridlock.model.network.GridLocation;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class RackableDevice extends ConfigurableDevice implements GridAsset {
 
+    @JsonBackReference
     @ManyToOne
     protected Rack rack;
 

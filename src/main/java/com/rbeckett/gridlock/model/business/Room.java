@@ -11,10 +11,12 @@
 package com.rbeckett.gridlock.model.business;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@EqualsAndHashCode(of = {"id"})
 @Data
 @Entity
 public class Room {
@@ -28,5 +30,5 @@ public class Room {
 
     @NotNull
     @OneToOne
-    private Location location;
+    private Site site;
 }

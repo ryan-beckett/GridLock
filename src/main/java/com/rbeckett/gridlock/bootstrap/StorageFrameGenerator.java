@@ -3,14 +3,15 @@ package com.rbeckett.gridlock.bootstrap;
 import com.rbeckett.gridlock.enums.AssetType;
 import com.rbeckett.gridlock.enums.StorageDeviceType;
 import com.rbeckett.gridlock.model.asset.StorageFrame;
-import com.rbeckett.gridlock.model.network.GridLocation;
 import com.rbeckett.gridlock.services.asset.StorageFrameService;
+import lombok.extern.slf4j.Slf4j;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Component
 public class StorageFrameGenerator extends AssetGenerator implements Generator<StorageFrame> {
 
@@ -29,12 +30,15 @@ public class StorageFrameGenerator extends AssetGenerator implements Generator<S
         for (int i = 0; i < numResults; i++) {
             final StorageFrame storageFrame = new StorageFrame();
             storageFrame.setType(AssetType.STORAGE_DEVICE);
-            generate(storageFrame, generators);
-            storageFrame.setModel(dataFactory.getItem(STORAGE_FRAMES));
+            storageFrame.setModel(STORAGE_FRAMES[i % STORAGE_FRAMES.length]);
             storageFrame.setSubType(dataFactory.getItem(StorageDeviceType.values()));
-            storageFrame.setGridLocation((GridLocation) dataFactory.getItem(generators[5].getResults()));
+            generate(storageFrame, generators);
+            AppDataGenerator.RoomGridLocationPair pr = AppDataGenerator.getNextRandomRoomAndGridLocation();
+            storageFrame.setRoom(pr.room);
+            storageFrame.setGridLocation(pr.gridLocation);
             storageFrames.add(storageFrameService.save(storageFrame));
         }
+        log.info("Generated data for StorageFrame entity");
     }
 
     @Override

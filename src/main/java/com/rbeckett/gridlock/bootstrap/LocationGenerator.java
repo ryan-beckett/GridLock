@@ -2,13 +2,14 @@ package com.rbeckett.gridlock.bootstrap;
 
 import com.rbeckett.gridlock.model.business.Location;
 import com.rbeckett.gridlock.services.business.LocationService;
+import lombok.extern.slf4j.Slf4j;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
+@Slf4j
 @Component
 public class LocationGenerator implements Generator<Location> {
 
@@ -25,19 +26,19 @@ public class LocationGenerator implements Generator<Location> {
 
     @Override
     public void generate(final int numResults, final Generator... generators) {
-        final Random random = new Random();
         for (int i = 0, j = 0; i < numResults; i++) {
             Location location = new Location();
             location.setAddress(dataFactory.getAddress());
             location.setCity(dataFactory.getCity());
-            location.setCountry(COUNTRIES[i % numResults]);
-            location.setName("Site " + (random.nextInt(numResults) + 1));
+            location.setCountry(COUNTRIES[i % COUNTRIES.length]);
+            location.setName("Location " + (i + 1));
             if (location.getCountry().equals("US")) {
                 location.setZip(dataFactory.getNumberText(5));
-                location.setState(STATES[(j++) % numResults]);
+                location.setState(STATES[(j++) % STATES.length]);
             }
             locations.add(locationService.save(location));
         }
+        log.info("Generated data for Location entity");
     }
 
     @Override

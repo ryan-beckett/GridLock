@@ -10,12 +10,15 @@
 
 package com.rbeckett.gridlock.model.network;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.rbeckett.gridlock.model.asset.RackableDevice;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@EqualsAndHashCode(of = {"id"})
 @Data
 @Entity
 public class Hop {
@@ -32,6 +35,7 @@ public class Hop {
     @OneToOne
     private Port port;
 
+    @JsonBackReference
     @NotNull
     @ManyToOne
     private NetworkConnection networkConnection;

@@ -2,12 +2,14 @@ package com.rbeckett.gridlock.bootstrap;
 
 import com.rbeckett.gridlock.model.user.Permission;
 import com.rbeckett.gridlock.services.user.PermissionService;
+import lombok.extern.slf4j.Slf4j;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Component
 public class PermissionGenerator implements Generator<Permission> {
 
@@ -22,6 +24,7 @@ public class PermissionGenerator implements Generator<Permission> {
     @Override
     public void generate(final int numResults, final Generator... generators) {
         //TODO
+        log.info("Generated data for Permission entity");
     }
 
     @Override

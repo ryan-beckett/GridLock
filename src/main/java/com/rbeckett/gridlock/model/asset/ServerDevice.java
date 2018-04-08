@@ -12,14 +12,12 @@ package com.rbeckett.gridlock.model.asset;
 
 import com.rbeckett.gridlock.enums.ServerDeviceType;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 public class ServerDevice extends RackableDevice {

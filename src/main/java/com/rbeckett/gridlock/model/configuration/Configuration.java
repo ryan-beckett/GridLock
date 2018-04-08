@@ -15,10 +15,12 @@ import com.rbeckett.gridlock.model.asset.ConfigurableDevice;
 import com.rbeckett.gridlock.model.business.ServiceContract;
 import com.rbeckett.gridlock.model.business.SupportUnit;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@EqualsAndHashCode(of = {"id"})
 @Data
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)

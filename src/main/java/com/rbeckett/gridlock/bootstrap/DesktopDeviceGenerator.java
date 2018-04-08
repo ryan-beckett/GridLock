@@ -5,12 +5,14 @@ import com.rbeckett.gridlock.enums.DesktopDeviceType;
 import com.rbeckett.gridlock.model.asset.DesktopDevice;
 import com.rbeckett.gridlock.model.business.Contact;
 import com.rbeckett.gridlock.services.asset.DesktopDeviceService;
+import lombok.extern.slf4j.Slf4j;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Component
 public class DesktopDeviceGenerator extends AssetGenerator implements Generator<DesktopDevice> {
 
@@ -29,12 +31,13 @@ public class DesktopDeviceGenerator extends AssetGenerator implements Generator<
         for (int i = 0; i < numResults; i++) {
             final DesktopDevice desktopDevice = new DesktopDevice();
             desktopDevice.setType(AssetType.DESKTOP_DEVICE);
-            generate(desktopDevice, generators);
-            desktopDevice.setModel(dataFactory.getItem(DESKTOP_DEVICES));
+            desktopDevice.setModel(DESKTOP_DEVICES[i % DESKTOP_DEVICES.length]);
             desktopDevice.setSubType(dataFactory.getItem(DesktopDeviceType.values()));
             desktopDevice.setUser((Contact) dataFactory.getItem(generators[5].getResults()));
+            generate(desktopDevice, generators);
             desktopDevices.add(desktopDeviceService.save(desktopDevice));
         }
+        log.info("Generated data for DesktopDevice entity");
     }
 
     @Override

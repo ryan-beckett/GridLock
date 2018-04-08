@@ -11,9 +11,11 @@
 package com.rbeckett.gridlock.model.user;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
+@EqualsAndHashCode(of = {"id"})
 @Data
 @Entity
 public class UserProfile {

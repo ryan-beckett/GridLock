@@ -14,7 +14,7 @@ import com.rbeckett.gridlock.model.network.GridLocation;
 
 public class GridUtils {
 
-    private static final int MAX_GRID_INDEX = 100;
+    public static final int MAX_GRID_INDEX = 100;
 
     public static String gridXToUserString(GridLocation gridLocation) {
         int x = gridLocation.getX();

@@ -12,12 +12,10 @@ package com.rbeckett.gridlock.model.asset;
 
 import com.rbeckett.gridlock.model.network.GridLocation;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 public class MainFrame extends ConfigurableDevice implements GridAsset {

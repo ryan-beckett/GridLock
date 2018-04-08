@@ -3,15 +3,16 @@ package com.rbeckett.gridlock.bootstrap;
 import com.rbeckett.gridlock.enums.AssetType;
 import com.rbeckett.gridlock.enums.StorageDeviceType;
 import com.rbeckett.gridlock.model.asset.StorageDevice;
-import com.rbeckett.gridlock.model.network.GridLocation;
 import com.rbeckett.gridlock.services.asset.RackService;
 import com.rbeckett.gridlock.services.asset.StorageDeviceService;
+import lombok.extern.slf4j.Slf4j;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Component
 public class StorageDeviceGenerator extends RackableDeviceGenerator implements Generator<StorageDevice> {
 
@@ -34,12 +35,12 @@ public class StorageDeviceGenerator extends RackableDeviceGenerator implements G
         for (int i = 0; i < numResults; i++) {
             final StorageDevice storageDevice = new StorageDevice();
             storageDevice.setType(AssetType.STORAGE_DEVICE);
-            generate(storageDevice, rackService, generators);
-            storageDevice.setModel(dataFactory.getItem(STORAGE_DEVICES));
+            storageDevice.setModel(STORAGE_DEVICES[i % STORAGE_DEVICES.length]);
             storageDevice.setSubType(dataFactory.getItem(StorageDeviceType.values()));
-            storageDevice.setGridLocation((GridLocation) dataFactory.getItem(generators[5].getResults()));
+            generate(storageDevice, rackService, generators);
             storageDevices.add(storageDeviceService.save(storageDevice));
         }
+        log.info("Generated data for StorageDevice entity");
     }
 
     @Override

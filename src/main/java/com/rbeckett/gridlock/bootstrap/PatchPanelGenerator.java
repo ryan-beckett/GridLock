@@ -3,15 +3,16 @@ package com.rbeckett.gridlock.bootstrap;
 import com.rbeckett.gridlock.enums.AssetType;
 import com.rbeckett.gridlock.enums.PortType;
 import com.rbeckett.gridlock.model.asset.PatchPanel;
-import com.rbeckett.gridlock.model.network.GridLocation;
 import com.rbeckett.gridlock.services.asset.PatchPanelService;
 import com.rbeckett.gridlock.services.asset.RackService;
+import lombok.extern.slf4j.Slf4j;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Component
 public class PatchPanelGenerator extends RackableDeviceGenerator implements Generator<PatchPanel> {
 
@@ -35,13 +36,13 @@ public class PatchPanelGenerator extends RackableDeviceGenerator implements Gene
         for (int i = 0; i < numResults; i++) {
             final PatchPanel patchPanel = new PatchPanel();
             patchPanel.setType(AssetType.PATCH_PANEL);
-            generate(patchPanel, rackService, generators);
-            patchPanel.setModel(dataFactory.getItem(PATCH_PANELS));
+            patchPanel.setModel(PATCH_PANELS[i % PATCH_PANELS.length]);
             patchPanel.setPortType(dataFactory.getItem(PortType.values()));
             patchPanel.setTotalNumberOfPorts(dataFactory.getItem(PORTS));
-            patchPanel.setGridLocation((GridLocation) dataFactory.getItem(generators[5].getResults()));
+            generate(patchPanel, rackService, generators);
             patchPanels.add(patchPanelService.save(patchPanel));
         }
+        log.info("Generated data for PatchPanel entity");
     }
 
     @Override

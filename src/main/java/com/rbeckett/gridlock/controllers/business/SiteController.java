@@ -10,8 +10,8 @@
 
 package com.rbeckett.gridlock.controllers.business;
 
-import com.rbeckett.gridlock.model.business.BusinessUnit;
-import com.rbeckett.gridlock.services.business.BusinessUnitService;
+import com.rbeckett.gridlock.model.business.Site;
+import com.rbeckett.gridlock.services.business.SiteService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -23,19 +23,19 @@ import java.util.Set;
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @Slf4j
 @RestController
-@RequestMapping({"/api/business-units/"})
-class BusinessUnitController {
+@RequestMapping({"/api/sites/"})
+class SiteController {
 
-    private final BusinessUnitService businessUnitService;
+    private final SiteService siteService;
 
-    private BusinessUnitController(BusinessUnitService businessUnitService) {
-        this.businessUnitService = businessUnitService;
+    private SiteController(SiteService siteService) {
+        this.siteService = siteService;
     }
 
     @GetMapping("")
-    public Set<BusinessUnit> getBusinessUnits() {
+    public Set<Site> getSites() {
         try {
-            return businessUnitService.findAll();
+            return siteService.findAll();
         } catch (DataAccessException ex) {
             log.debug(ex.getMessage());
             return null;
@@ -43,45 +43,45 @@ class BusinessUnitController {
     }
 
     @GetMapping("id/{id}")
-    public ResponseEntity getBusinessUnitById(@PathVariable Long id) {
+    public ResponseEntity getSiteById(@PathVariable Long id) {
         try {
-            return new ResponseEntity<>(businessUnitService.findById(id), HttpStatus.OK);
+            return new ResponseEntity<>(siteService.findById(id), HttpStatus.OK);
         } catch (DataAccessException ex) {
             log.debug(ex.getMessage());
-            return new ResponseEntity<>("No businessUnit with id = '" + id + "' could be found.", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("No site with id = '" + id + "' could be found.", HttpStatus.NOT_FOUND);
         }
     }
 
     @PostMapping(value = "")
-    public ResponseEntity createBusinessUnit(@RequestBody BusinessUnit businessUnit) {
+    public ResponseEntity createSite(@RequestBody Site site) {
         try {
-            return new ResponseEntity<>(businessUnitService.save(businessUnit)
+            return new ResponseEntity<>(siteService.save(site)
                     , HttpStatus.OK);
         } catch (DataAccessException ex) {
             log.debug(ex.getMessage());
-            return new ResponseEntity<>("Could not create the businessUnit.", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Could not create the site.", HttpStatus.NOT_FOUND);
         }
     }
 
     @DeleteMapping("id/{id}")
-    public ResponseEntity deleteBusinessUnit(@PathVariable Long id) {
+    public ResponseEntity deleteSite(@PathVariable Long id) {
         try {
-            businessUnitService.deleteById(id);
+            siteService.deleteById(id);
             return new ResponseEntity<>(id, HttpStatus.OK);
         } catch (DataAccessException ex) {
             log.debug(ex.getMessage());
-            return new ResponseEntity<>("No businessUnit with id = '" + id + "' could be found.", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("No site with id = '" + id + "' could be found.", HttpStatus.NOT_FOUND);
         }
     }
 
     @PutMapping("id/{id}")
-    public ResponseEntity updateBusinessUnit(@PathVariable Long id, @RequestBody BusinessUnit businessUnit) {
+    public ResponseEntity updateSite(@PathVariable Long id, @RequestBody Site site) {
         try {
-            businessUnitService.save(businessUnit);
-            return new ResponseEntity<>(businessUnit, HttpStatus.OK);
+            siteService.save(site);
+            return new ResponseEntity<>(site, HttpStatus.OK);
         } catch (DataAccessException ex) {
             log.debug(ex.getMessage());
-            return new ResponseEntity<>("Could not update businessUnit with id = '" + id + "'.", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Could not update site with id = '" + id + "'.", HttpStatus.NOT_FOUND);
         }
     }
 }

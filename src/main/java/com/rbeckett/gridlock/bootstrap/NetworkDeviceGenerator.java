@@ -5,12 +5,14 @@ import com.rbeckett.gridlock.enums.NetworkDeviceType;
 import com.rbeckett.gridlock.model.asset.NetworkDevice;
 import com.rbeckett.gridlock.services.asset.NetworkDeviceService;
 import com.rbeckett.gridlock.services.asset.RackService;
+import lombok.extern.slf4j.Slf4j;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Component
 public class NetworkDeviceGenerator extends RackableDeviceGenerator implements Generator<NetworkDevice> {
 
@@ -32,11 +34,12 @@ public class NetworkDeviceGenerator extends RackableDeviceGenerator implements G
         for (int i = 0; i < numResults; i++) {
             final NetworkDevice networkDevice = new NetworkDevice();
             networkDevice.setType(AssetType.NETWORK_DEVICE);
-            generate(networkDevice, rackService, generators);
-            networkDevice.setModel(dataFactory.getItem(NETWORK_DEVICES));
+            networkDevice.setModel(NETWORK_DEVICES[i % NETWORK_DEVICES.length]);
             networkDevice.setSubType(dataFactory.getItem(NetworkDeviceType.values()));
+            generate(networkDevice, rackService, generators);
             networkDevices.add(networkDeviceService.save(networkDevice));
         }
+        log.info("Generated data for NetworkDevice entity");
     }
 
     @Override

@@ -10,16 +10,15 @@
 
 package com.rbeckett.gridlock.model.asset;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.rbeckett.gridlock.model.network.GridLocation;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 public class Rack extends Asset implements GridAsset {
@@ -27,6 +26,7 @@ public class Rack extends Asset implements GridAsset {
     @NotNull
     private int uHeight;
 
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rack", fetch = FetchType.LAZY)
     private Set<RackableDevice> devices = new HashSet<>();
 
@@ -46,30 +46,36 @@ public class Rack extends Asset implements GridAsset {
     }
 
     public int nextOpenULocation() {
-        for (int i = 1; i < uHeight; i++) {
-            final int j = i;
-            if (!devices.stream().anyMatch(rackableDevice -> rackableDevice.getULocation() == j))
-                return i;
-        }
-        return -1;
+        return nextOpenULocation(1);
     }
 
     public int nextOpenULocation(int startULocation) {
+        if (startULocation < 1)
+            throw new IllegalArgumentException("startULocation < 1");
         for (int i = startULocation; i < uHeight; i++) {
-            final int j = i;
-            if (!devices.stream().anyMatch(rackableDevice -> rackableDevice.getULocation() == j))
+            boolean found = false;
+            for (RackableDevice rackableDevice : devices) {
+                if (rackableDevice.getULocation() == i) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found)
                 return i;
         }
         return -1;
     }
 
     public int openSpaceAtULocation(final int uLocation) {
-        int i = uLocation;
-        for (; i < uHeight; i++) {
-            final int j = i;
-            if (devices.stream().anyMatch(rackableDevice -> rackableDevice.getULocation() == j))
-                break;
+        if (uLocation < 1)
+            throw new IllegalArgumentException("uLocation < 1");
+        int openSpace = 0;
+        for (int i = uLocation; i < uHeight; i++) {
+            for (RackableDevice rackableDevice : devices)
+                if (rackableDevice.getULocation() == i)
+                    return openSpace;
+            openSpace++;
         }
-        return i - uLocation;
+        return openSpace;
     }
 }

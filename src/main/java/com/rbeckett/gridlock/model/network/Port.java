@@ -13,10 +13,12 @@ package com.rbeckett.gridlock.model.network;
 import com.rbeckett.gridlock.enums.PortType;
 import com.rbeckett.gridlock.model.asset.ConfigurableDevice;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@EqualsAndHashCode(of = {"id"})
 @Data
 @Entity
 public class Port {

@@ -3,15 +3,16 @@ package com.rbeckett.gridlock.bootstrap;
 import com.rbeckett.gridlock.enums.AssetType;
 import com.rbeckett.gridlock.enums.ServerDeviceType;
 import com.rbeckett.gridlock.model.asset.ServerDevice;
-import com.rbeckett.gridlock.model.network.GridLocation;
 import com.rbeckett.gridlock.services.asset.RackService;
 import com.rbeckett.gridlock.services.asset.ServerDeviceService;
+import lombok.extern.slf4j.Slf4j;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Component
 public class ServerDeviceGenerator extends RackableDeviceGenerator implements Generator<ServerDevice> {
 
@@ -34,12 +35,12 @@ public class ServerDeviceGenerator extends RackableDeviceGenerator implements Ge
         for (int i = 0; i < numResults; i++) {
             final ServerDevice serverDevice = new ServerDevice();
             serverDevice.setType(AssetType.SERVER_DEVICE);
-            generate(serverDevice, rackService, generators);
-            serverDevice.setModel(dataFactory.getItem(SERVER_DEVICES));
+            serverDevice.setModel(SERVER_DEVICES[i % SERVER_DEVICES.length]);
             serverDevice.setSubType(dataFactory.getItem(ServerDeviceType.values()));
-            serverDevice.setGridLocation((GridLocation) dataFactory.getItem(generators[5].getResults()));
+            generate(serverDevice, rackService, generators);
             serverDevices.add(serverDeviceService.save(serverDevice));
         }
+        log.info("Generated data for ServerDevice entity");
     }
 
     @Override
