@@ -42,7 +42,6 @@ public class Asset {
     @NotNull
     protected String serial;
 
-    @QueryInit("*")
     @NotNull
     @OneToOne
     protected Manufacturer manufacturer;
@@ -55,7 +54,7 @@ public class Asset {
     @Lob
     protected String description;
 
-    @QueryInit("*")
+    @QueryInit("site")
     @NotNull
     @OneToOne
     protected Room room;
@@ -68,12 +67,10 @@ public class Asset {
     @Enumerated(value = EnumType.STRING)
     protected AssetStatus status;
 
-    @QueryInit("*")
     @NotNull
     @OneToOne
     protected BusinessUnit owner;
 
-    @QueryInit("*")
     @OneToOne
     protected ServiceContract serviceContract;
 
