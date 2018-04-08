@@ -10,6 +10,7 @@
 
 package com.rbeckett.gridlock.model.asset;
 
+import com.querydsl.core.annotations.QueryInit;
 import com.rbeckett.gridlock.enums.AssetStatus;
 import com.rbeckett.gridlock.enums.AssetType;
 import com.rbeckett.gridlock.model.business.BusinessUnit;
@@ -41,6 +42,7 @@ public class Asset {
     @NotNull
     protected String serial;
 
+    @QueryInit("*")
     @NotNull
     @OneToOne
     protected Manufacturer manufacturer;
@@ -53,6 +55,7 @@ public class Asset {
     @Lob
     protected String description;
 
+    @QueryInit("*")
     @NotNull
     @OneToOne
     protected Room room;
@@ -65,10 +68,12 @@ public class Asset {
     @Enumerated(value = EnumType.STRING)
     protected AssetStatus status;
 
+    @QueryInit("*")
     @NotNull
     @OneToOne
     protected BusinessUnit owner;
 
+    @QueryInit("*")
     @OneToOne
     protected ServiceContract serviceContract;
 

@@ -32,13 +32,13 @@ import java.util.Set;
 @Service
 public class AssetServiceImpl implements AssetService {
 
-    private final AssetRepository assetRepository;
     @PersistenceContext
-    private EntityManager em;
+    private EntityManager entityManager;
+    private final AssetRepository assetRepository;
 
-    private AssetServiceImpl(AssetRepository assetRepository, EntityManager em) {
+    private AssetServiceImpl(AssetRepository assetRepository, EntityManager entityManager) {
         this.assetRepository = assetRepository;
-        this.em = em;
+        this.entityManager = entityManager;
     }
 
     @Override
@@ -88,7 +88,7 @@ public class AssetServiceImpl implements AssetService {
     public Set<Asset> findAllByQueryParams(Map<String, String[]> parameterMap) {
         if (isQueryParamsEmpty(parameterMap))
             return new HashSet<>();
-        JPAQuery<Asset> query = new JPAQuery<>(em);
+        JPAQuery<Asset> query = new JPAQuery<>(entityManager);
         QAsset asset = QAsset.asset;
         query = query.from(asset);
         String id = parameterMap.get("id")[0];
