@@ -54,7 +54,7 @@ public class Asset {
     @Lob
     protected String description;
 
-    @QueryInit("site")
+    @QueryInit("site.*")
     @NotNull
     @OneToOne
     protected Room room;
