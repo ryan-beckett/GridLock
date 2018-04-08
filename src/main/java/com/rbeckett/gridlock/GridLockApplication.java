@@ -14,7 +14,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-class GridLockApplication {
+public class GridLockApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(GridLockApplication.class, args);
