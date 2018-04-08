@@ -13,6 +13,7 @@ package com.rbeckett.gridlock.model.business;
 import com.rbeckett.gridlock.enums.ServiceContractType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -20,6 +21,7 @@ import java.time.LocalDate;
 
 @EqualsAndHashCode(of = {"id"})
 @Data
+@Lazy
 @Entity
 public class ServiceContract {
 

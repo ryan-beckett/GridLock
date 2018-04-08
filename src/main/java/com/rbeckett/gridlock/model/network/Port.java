@@ -14,12 +14,14 @@ import com.rbeckett.gridlock.enums.PortType;
 import com.rbeckett.gridlock.model.asset.ConfigurableDevice;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @EqualsAndHashCode(of = {"id"})
 @Data
+@Lazy
 @Entity
 public class Port {
 

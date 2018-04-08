@@ -12,6 +12,7 @@ package com.rbeckett.gridlock.model.asset;
 
 import com.rbeckett.gridlock.enums.StorageDeviceType;
 import lombok.Data;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -19,6 +20,7 @@ import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 
 @Data
+@Lazy
 @Entity
 public class StorageDevice extends RackableDevice {
 

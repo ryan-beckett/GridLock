@@ -13,6 +13,7 @@ package com.rbeckett.gridlock.model.asset;
 import com.rbeckett.gridlock.enums.StorageDeviceType;
 import com.rbeckett.gridlock.model.network.GridLocation;
 import lombok.Data;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -21,6 +22,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Data
+@Lazy
 @Entity
 public class StorageFrame extends ConfigurableDevice implements GridAsset {
 

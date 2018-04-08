@@ -12,6 +12,7 @@ package com.rbeckett.gridlock.model.configuration;
 
 import com.rbeckett.gridlock.model.network.NetworkConnection;
 import lombok.Data;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -19,6 +20,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
+@Lazy
 @Entity
 public class NetworkConfiguration extends Configuration {
 

@@ -11,11 +11,13 @@
 package com.rbeckett.gridlock.model.configuration;
 
 import lombok.Data;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
 @Data
+@Lazy
 @Entity
 public class OSConfiguration extends Configuration {
 

@@ -14,6 +14,7 @@ import com.rbeckett.gridlock.model.business.BusinessUnit;
 import com.rbeckett.gridlock.model.business.Contact;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -24,6 +25,7 @@ import java.util.Set;
 @EqualsAndHashCode(of = {"id"})
 @SuppressWarnings("JpaDataSourceORMInspection")
 @Data
+@Lazy
 @Entity
 public class User {
     @Id

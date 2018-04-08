@@ -19,12 +19,14 @@ import com.rbeckett.gridlock.model.business.Room;
 import com.rbeckett.gridlock.model.business.ServiceContract;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @EqualsAndHashCode(of = {"id"})
 @Data
+@Lazy
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Asset {

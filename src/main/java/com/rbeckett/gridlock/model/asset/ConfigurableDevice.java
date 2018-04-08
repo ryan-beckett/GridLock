@@ -14,10 +14,12 @@ import com.rbeckett.gridlock.model.configuration.HardwareConfiguration;
 import com.rbeckett.gridlock.model.configuration.NetworkConfiguration;
 import com.rbeckett.gridlock.model.configuration.OSConfiguration;
 import lombok.Data;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 
 @Data
+@Lazy
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class ConfigurableDevice extends Asset {

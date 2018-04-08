@@ -18,6 +18,7 @@ import com.rbeckett.gridlock.model.asset.Asset;
 import com.rbeckett.gridlock.model.asset.QAsset;
 import com.rbeckett.gridlock.repositories.asset.AssetRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -29,6 +30,7 @@ import java.util.Set;
 
 @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @Slf4j
+@Lazy
 @Service
 public class AssetServiceImpl implements AssetService {
 

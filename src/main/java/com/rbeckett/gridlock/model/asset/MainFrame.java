@@ -12,11 +12,13 @@ package com.rbeckett.gridlock.model.asset;
 
 import com.rbeckett.gridlock.model.network.GridLocation;
 import lombok.Data;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
 @Data
+@Lazy
 @Entity
 public class MainFrame extends ConfigurableDevice implements GridAsset {
 

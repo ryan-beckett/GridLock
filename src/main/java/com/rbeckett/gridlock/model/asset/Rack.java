@@ -13,6 +13,7 @@ package com.rbeckett.gridlock.model.asset;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.rbeckett.gridlock.model.network.GridLocation;
 import lombok.Data;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -20,6 +21,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
+@Lazy
 @Entity
 public class Rack extends Asset implements GridAsset {
 

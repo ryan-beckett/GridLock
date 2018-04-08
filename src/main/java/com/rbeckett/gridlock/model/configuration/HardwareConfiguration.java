@@ -11,10 +11,12 @@
 package com.rbeckett.gridlock.model.configuration;
 
 import lombok.Data;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.Entity;
 
 @Data
+@Lazy
 @Entity
 public class HardwareConfiguration extends Configuration {
 

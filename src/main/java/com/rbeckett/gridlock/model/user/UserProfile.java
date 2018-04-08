@@ -12,11 +12,13 @@ package com.rbeckett.gridlock.model.user;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 
 @EqualsAndHashCode(of = {"id"})
 @Data
+@Lazy
 @Entity
 public class UserProfile {
     @Id

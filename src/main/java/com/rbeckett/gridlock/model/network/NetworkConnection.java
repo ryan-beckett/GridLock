@@ -15,6 +15,7 @@ import com.rbeckett.gridlock.enums.ConnectionType;
 import com.rbeckett.gridlock.model.configuration.NetworkConfiguration;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -23,6 +24,7 @@ import java.util.Set;
 
 @EqualsAndHashCode(of = {"id"})
 @Data
+@Lazy
 @Entity
 public class NetworkConnection {
 

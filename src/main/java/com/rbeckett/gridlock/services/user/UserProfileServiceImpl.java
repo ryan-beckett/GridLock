@@ -13,6 +13,7 @@ package com.rbeckett.gridlock.services.user;
 import com.rbeckett.gridlock.model.user.UserProfile;
 import com.rbeckett.gridlock.repositories.user.UserProfileRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -20,6 +21,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Slf4j
+@Lazy
 @Service
 public class UserProfileServiceImpl implements UserProfileService {
 

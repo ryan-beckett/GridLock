@@ -13,10 +13,12 @@ package com.rbeckett.gridlock.model.asset;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.rbeckett.gridlock.model.network.GridLocation;
 import lombok.Data;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 
 @Data
+@Lazy
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class RackableDevice extends ConfigurableDevice implements GridAsset {

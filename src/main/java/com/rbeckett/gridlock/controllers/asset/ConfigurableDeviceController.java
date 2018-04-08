@@ -13,6 +13,7 @@ package com.rbeckett.gridlock.controllers.asset;
 import com.rbeckett.gridlock.model.asset.ConfigurableDevice;
 import com.rbeckett.gridlock.services.asset.ConfigurableDeviceService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
+@Lazy
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @Slf4j
 @RestController
