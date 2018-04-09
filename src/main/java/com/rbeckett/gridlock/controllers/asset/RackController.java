@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 @Lazy
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @Slf4j
 @RestController
 @RequestMapping({"/api/racks/"})
@@ -84,6 +84,16 @@ class RackController {
         } catch (DataAccessException ex) {
             log.debug(ex.getMessage());
             return new ResponseEntity<>("Could not update rack with id = '" + id + "'.", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("count")
+    public Long count() {
+        try {
+            return rackService.count();
+        } catch (DataAccessException ex) {
+            log.debug(ex.getMessage());
+            return null;
         }
     }
 }
