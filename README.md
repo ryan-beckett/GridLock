@@ -1,25 +1,18 @@
-# GridLock (In Development...)
-Web System for Data Center Infrastructure Management
-
-## Introduction
-GridLock is a platform that supports asset lifecycle management and provides useful tools to support data center challenges 
-ranging from pathing in a large-scale network backbone to power monitoring.
+# Introduction
+A portfolio project that provides basic data center infrastructure management. GridLock is a platform that supports IT asset lifecycle management and data center modeling tools.
 
 ## Demo
-Coming soon!
+https://gridlock-frontend.herokuapp.com
 
 ## Planned Features
 - Asset Lifecycle Management
-- Role-based User Permissions
-- Security Integration w/ LDAP Providers
+- Charting
 - Grid Visualizations
 - Rack sketches w/ Visio Stencils
 - Network Fabric Algorithms
-- Power Usage Monitoring
-- Outage Simulations
 - Reporting Tools (Excel, XML, PDF)
 
 ## Platform
-GridLock is built upon a Spring MVC 5 back-end and AngularJS 5 front-end. You can choose whatever database you like, as the platform 
-can be configured for all of them! GridLock is secure. Options include built-in database authentication, OAuth, and MS Active Directory. 
-Power monitoring integrates with popular providers, such as Geist Open API.
+GridLock is built upon a Spring MVC 5 back-end and AngularJS 5 front-end.
+
+## Design Challenges
