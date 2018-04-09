@@ -1,9 +1,6 @@
 # Introduction
 A portfolio project that provides basic data center infrastructure management. GridLock is a platform that supports IT asset lifecycle management and data center modeling tools.
 
-## Demo
-https://gridlock-frontend.herokuapp.com
-
 ## Planned Features
 - Advanced Asset searching
 - Asset management via forms
