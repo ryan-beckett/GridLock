@@ -1,3 +1,5 @@
+.DS_STORE
+
 target/
 !.mvn/wrapper/maven-wrapper.jar
 
@@ -24,7 +26,24 @@ nbdist/
 .nb-gradle/
 
 ## Angular ##
-node_modules/
+bazel-*
+e2e_test.*
+node_modules
+bower_components
+tools/gulp-tasks/cldr/cldr-data/
+
+# Don't check in secret files
+*secret.js
+
+# Ignore npm/yarn debug log
+npm-debug.log
+yarn-error.log
+
+# build-analytics
+.build-analytics
+
+# rollup-test output
+/modules/rollup-test/dist/
 
 ## Spring ##
 target/
