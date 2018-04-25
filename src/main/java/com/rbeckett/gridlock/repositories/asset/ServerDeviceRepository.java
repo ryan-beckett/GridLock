@@ -14,4 +14,5 @@ import com.rbeckett.gridlock.model.asset.ServerDevice;
 import org.springframework.data.repository.CrudRepository;
 
 public interface ServerDeviceRepository extends CrudRepository<ServerDevice, Long> {
+    ServerDevice findByName(String name);
 }

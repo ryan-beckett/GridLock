@@ -11,7 +11,10 @@
 package com.rbeckett.gridlock.model.asset;
 
 import com.rbeckett.gridlock.enums.NetworkDeviceType;
-import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.Entity;
@@ -19,7 +22,10 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 
-@Data
+@ToString
+@Getter
+@Setter
+@RequiredArgsConstructor
 @Lazy
 @Entity
 public class NetworkDevice extends RackableDevice {

@@ -14,4 +14,5 @@ import com.rbeckett.gridlock.model.asset.PatchPanel;
 import org.springframework.data.repository.CrudRepository;
 
 public interface PatchPanelRepository extends CrudRepository<PatchPanel, Long> {
+    PatchPanel findByName(String name);
 }

@@ -63,4 +63,9 @@ public class ServerDeviceServiceImpl implements ServerDeviceService {
     public void deleteById(Long id) {
         serverDeviceRepository.deleteById(id);
     }
+
+    @Override
+    public ServerDevice findByName(final String name) {
+        return serverDeviceRepository.findByName(name);
+    }
 }

@@ -63,4 +63,9 @@ public class StorageDeviceServiceImpl implements StorageDeviceService {
     public void deleteById(Long id) {
         storageDeviceRepository.deleteById(id);
     }
+
+    @Override
+    public StorageDevice findByName(final String name) {
+        return storageDeviceRepository.findByName(name);
+    }
 }

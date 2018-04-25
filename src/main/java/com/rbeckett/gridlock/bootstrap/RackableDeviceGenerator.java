@@ -35,8 +35,8 @@ public class RackableDeviceGenerator extends AssetGenerator {
                         rackableDevice.setULocation(uLocation);
                         rackableDevice.setGridLocation(rack.getGridLocation());
                         rackableDevice.setRoom(rack.getRoom());
-                        rack.getDevices().add(rackableDevice);
-                        rackService.save(rack);
+                        rack = rackService.save(rack);
+                        updateGeneratedRackList(generators[5].getResults(), rack);
                         placed = true;
                         break;
                     }
@@ -46,5 +46,21 @@ public class RackableDeviceGenerator extends AssetGenerator {
         }
         if (!placed)
             log.info("Couldn't place rackable device in any rack: {" + rackableDevice.toString() + "}");
+    }
+
+    private void updateGeneratedRackList(List<Rack> racks, Rack updatedRack) {
+        int index = -1;
+        for (int i = 0; i < racks.size(); i++) {
+            if (racks.get(i).getName().equals(updatedRack.getName())) {
+                index = i;
+                break;
+            }
+        }
+        if (index < 0)
+            log.info("Couldn't find rack in generated rack list");
+        else {
+            racks.remove(index);
+            racks.add(index, updatedRack);
+        }
     }
 }

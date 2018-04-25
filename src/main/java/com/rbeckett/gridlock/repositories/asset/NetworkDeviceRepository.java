@@ -14,4 +14,5 @@ import com.rbeckett.gridlock.model.asset.NetworkDevice;
 import org.springframework.data.repository.CrudRepository;
 
 public interface NetworkDeviceRepository extends CrudRepository<NetworkDevice, Long> {
+    NetworkDevice findByName(String name);
 }

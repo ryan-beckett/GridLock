@@ -41,4 +41,9 @@ public class Hop {
     @NotNull
     @ManyToOne
     private NetworkConnection networkConnection;
+
+    public void setNetworkConnection(NetworkConnection networkConnection) {
+        this.networkConnection = networkConnection;
+        networkConnection.getHops().add(this);
+    }
 }

@@ -14,4 +14,5 @@ import com.rbeckett.gridlock.model.asset.StorageDevice;
 import org.springframework.data.repository.CrudRepository;
 
 public interface StorageDeviceRepository extends CrudRepository<StorageDevice, Long> {
+    StorageDevice findByName(String name);
 }

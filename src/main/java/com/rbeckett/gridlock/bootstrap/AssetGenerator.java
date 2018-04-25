@@ -54,6 +54,7 @@ public class AssetGenerator {
                 break;
             case STORAGE_DEVICE:
                 asset.setName("storage-device-" + (++numStorageDevices));
+                break;
             case PATCH_PANEL:
                 asset.setName("patch-panel-" + (++numPatchPanels));
                 break;

@@ -14,5 +14,5 @@ import com.rbeckett.gridlock.model.asset.PatchPanel;
 import com.rbeckett.gridlock.services.BaseService;
 
 public interface PatchPanelService extends BaseService<PatchPanel> {
-
+    PatchPanel findByName(String name);
 }

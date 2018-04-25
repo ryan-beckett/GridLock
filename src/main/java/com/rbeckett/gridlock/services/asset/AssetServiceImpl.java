@@ -10,7 +10,6 @@
 
 package com.rbeckett.gridlock.services.asset;
 
-import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.rbeckett.gridlock.enums.AssetStatus;
 import com.rbeckett.gridlock.enums.AssetType;
@@ -98,10 +97,10 @@ public class AssetServiceImpl implements AssetService {
             query = query.where(asset.id.eq(Long.parseLong(id)));
         String name = parameterMap.get("name")[0];
         if (!name.isEmpty())
-            query = query.where(asset.name.likeIgnoreCase(Expressions.asString("%").concat(name).concat("%")));
+            query = query.where(asset.name.containsIgnoreCase(name));
         String serial = parameterMap.get("serial")[0];
         if (!serial.isEmpty())
-            query = query.where(asset.serial.likeIgnoreCase(Expressions.asString("%").concat(serial).concat("%")));
+            query = query.where(asset.serial.containsIgnoreCase(serial));
         String type = parameterMap.get("type")[0];
         if (!type.isEmpty())
             query = query.where(asset.type.eq(AssetType.valueOf(type)));
@@ -110,26 +109,30 @@ public class AssetServiceImpl implements AssetService {
             query = query.where(asset.status.eq(AssetStatus.valueOf(status)));
         String manufacturer = parameterMap.get("manufacturer")[0];
         if (!manufacturer.isEmpty())
-            query = query.where(asset.manufacturer.name.likeIgnoreCase(Expressions.asString("%").concat(manufacturer).concat("%")));
+            query = query.where(asset.manufacturer.name.containsIgnoreCase(manufacturer));
         String model = parameterMap.get("model")[0];
         if (!model.isEmpty())
-            query = query.where(asset.model.likeIgnoreCase(Expressions.asString("%").concat(model).concat("%")));
+            query = query.where(asset.model.containsIgnoreCase(model));
         String partNumber = parameterMap.get("partNumber")[0];
         if (!partNumber.isEmpty())
-            query = query.where(asset.partNumber.likeIgnoreCase(Expressions.asString("%").concat(partNumber).concat("%")));
+            query = query.where(asset.partNumber.containsIgnoreCase(partNumber));
         String description = parameterMap.get("description")[0];
         if (!description.isEmpty())
-            query = query.where(asset.description.likeIgnoreCase(Expressions.asString("%").concat(description).concat("%")));
+            query = query.where(asset.description.containsIgnoreCase(description));
         String location = parameterMap.get("location")[0];
         if (!location.isEmpty())
-            query = query.where(asset.room.site.location.name.likeIgnoreCase(Expressions.asString("%").concat(location).concat("%")));
+            query = query.where(asset.room.site.location.name.containsIgnoreCase(location));
         String room = parameterMap.get("room")[0];
         if (!room.isEmpty())
-            query = query.where(asset.room.name.likeIgnoreCase(Expressions.asString("%").concat(room).concat("%")));
+            query = query.where(asset.room.name.containsIgnoreCase(room));
         String owner = parameterMap.get("owner")[0];
         if (!owner.isEmpty())
-            query = query.where(asset.owner.name.likeIgnoreCase(Expressions.asString("%").concat(owner).concat("%")));
-        return new HashSet<>(query.fetch());
+            query = query.where(asset.owner.name.containsIgnoreCase(owner));
+        Set<Asset> assets = new HashSet<>(query.fetch());
+        final StringBuilder sb = new StringBuilder();
+        parameterMap.forEach((k, v) -> sb.append(k + " => '" + v[0] + "', "));
+        log.info("Asset API query request w/ params: " + sb.toString() + "' returned " + assets.size() + " assets");
+        return assets;
     }
 
     private boolean isQueryParamsEmpty(final Map<String, String[]> parameterMap) {

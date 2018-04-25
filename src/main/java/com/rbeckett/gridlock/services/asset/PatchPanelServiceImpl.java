@@ -63,4 +63,9 @@ public class PatchPanelServiceImpl implements PatchPanelService {
     public void deleteById(Long id) {
         patchPanelRepository.deleteById(id);
     }
+
+    @Override
+    public PatchPanel findByName(final String name) {
+        return patchPanelRepository.findByName(name);
+    }
 }

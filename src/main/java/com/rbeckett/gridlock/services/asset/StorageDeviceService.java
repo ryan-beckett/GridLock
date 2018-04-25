@@ -14,5 +14,5 @@ import com.rbeckett.gridlock.model.asset.StorageDevice;
 import com.rbeckett.gridlock.services.BaseService;
 
 public interface StorageDeviceService extends BaseService<StorageDevice> {
-
+    StorageDevice findByName(String name);
 }

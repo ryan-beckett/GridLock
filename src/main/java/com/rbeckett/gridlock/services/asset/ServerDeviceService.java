@@ -14,4 +14,5 @@ import com.rbeckett.gridlock.model.asset.ServerDevice;
 import com.rbeckett.gridlock.services.BaseService;
 
 public interface ServerDeviceService extends BaseService<ServerDevice> {
+    ServerDevice findByName(String name);
 }

@@ -14,6 +14,6 @@ import com.rbeckett.gridlock.model.asset.NetworkDevice;
 import com.rbeckett.gridlock.services.BaseService;
 
 public interface NetworkDeviceService extends BaseService<NetworkDevice> {
-
+    NetworkDevice findByName(String name);
 }
 

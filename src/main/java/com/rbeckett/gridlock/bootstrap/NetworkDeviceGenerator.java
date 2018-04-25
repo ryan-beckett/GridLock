@@ -37,7 +37,7 @@ public class NetworkDeviceGenerator extends RackableDeviceGenerator implements G
             networkDevice.setModel(NETWORK_DEVICES[i % NETWORK_DEVICES.length]);
             networkDevice.setSubType(dataFactory.getItem(NetworkDeviceType.values()));
             generate(networkDevice, rackService, generators);
-            networkDevices.add(networkDeviceService.save(networkDevice));
+            networkDevices.add(networkDeviceService.findByName(networkDevice.getName()));
         }
         log.info("Generated data for NetworkDevice entity");
     }

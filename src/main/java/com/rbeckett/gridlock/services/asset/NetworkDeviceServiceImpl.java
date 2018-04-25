@@ -63,4 +63,9 @@ public class NetworkDeviceServiceImpl implements NetworkDeviceService {
     public void deleteById(Long id) {
         networkDeviceRepository.deleteById(id);
     }
+
+    @Override
+    public NetworkDevice findByName(final String name) {
+        return networkDeviceRepository.findByName(name);
+    }
 }

@@ -40,7 +40,7 @@ public class PatchPanelGenerator extends RackableDeviceGenerator implements Gene
             patchPanel.setPortType(dataFactory.getItem(PortType.values()));
             patchPanel.setTotalNumberOfPorts(dataFactory.getItem(PORTS));
             generate(patchPanel, rackService, generators);
-            patchPanels.add(patchPanelService.save(patchPanel));
+            patchPanels.add(patchPanelService.findByName(patchPanel.getName()));
         }
         log.info("Generated data for PatchPanel entity");
     }

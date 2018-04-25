@@ -12,12 +12,16 @@ package com.rbeckett.gridlock.model.asset;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.rbeckett.gridlock.model.network.GridLocation;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 
-@Data
+@ToString
+@Getter
+@Setter
 @Lazy
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -42,5 +46,10 @@ public class RackableDevice extends ConfigurableDevice implements GridAsset {
     @Override
     public GridLocation getGridLocation() {
         return gridLocation;
+    }
+
+    public void setRack(Rack rack) {
+        this.rack = rack;
+        rack.getDevices().add(this);
     }
 }

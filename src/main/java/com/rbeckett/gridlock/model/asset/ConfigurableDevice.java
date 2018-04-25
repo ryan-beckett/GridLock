@@ -13,12 +13,16 @@ package com.rbeckett.gridlock.model.asset;
 import com.rbeckett.gridlock.model.configuration.HardwareConfiguration;
 import com.rbeckett.gridlock.model.configuration.NetworkConfiguration;
 import com.rbeckett.gridlock.model.configuration.OSConfiguration;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 
-@Data
+@ToString
+@Getter
+@Setter
 @Lazy
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -32,4 +36,7 @@ public class ConfigurableDevice extends Asset {
 
     @OneToOne(cascade = CascadeType.ALL)
     protected HardwareConfiguration hardwareConfiguration;
+
+    protected ConfigurableDevice() {
+    }
 }

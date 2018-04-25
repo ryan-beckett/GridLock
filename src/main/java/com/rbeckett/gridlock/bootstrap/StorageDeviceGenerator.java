@@ -38,7 +38,7 @@ public class StorageDeviceGenerator extends RackableDeviceGenerator implements G
             storageDevice.setModel(STORAGE_DEVICES[i % STORAGE_DEVICES.length]);
             storageDevice.setSubType(dataFactory.getItem(StorageDeviceType.values()));
             generate(storageDevice, rackService, generators);
-            storageDevices.add(storageDeviceService.save(storageDevice));
+            storageDevices.add(storageDeviceService.findByName(storageDevice.getName()));
         }
         log.info("Generated data for StorageDevice entity");
     }

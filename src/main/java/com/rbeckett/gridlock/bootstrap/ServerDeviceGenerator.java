@@ -38,7 +38,7 @@ public class ServerDeviceGenerator extends RackableDeviceGenerator implements Ge
             serverDevice.setModel(SERVER_DEVICES[i % SERVER_DEVICES.length]);
             serverDevice.setSubType(dataFactory.getItem(ServerDeviceType.values()));
             generate(serverDevice, rackService, generators);
-            serverDevices.add(serverDeviceService.save(serverDevice));
+            serverDevices.add(serverDeviceService.findByName(serverDevice.getName()));
         }
         log.info("Generated data for ServerDevice entity");
     }
