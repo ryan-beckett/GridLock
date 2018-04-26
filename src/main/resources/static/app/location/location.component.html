@@ -1,0 +1,74 @@
+<table class="table table-striped" *ngIf="location">
+  <tbody>
+  <tr>
+    <td colspan="1">
+      <form class="well form-horizontal">
+        <fieldset>
+          <div class="form-group">
+            <label class="col-md-4 control-label">Name</label
+            <div class="col-md-8 inputGroupContainer">
+              <div class="input-group"><span class="input-group-addon"><i
+                class="glyphicon glyphicon-home"></i></span><input [(ngModel)]="location.name" id="location.name"
+                                                                   name="location.name"
+                                                                   placeholder="Address Line 1" class="form-control"
+                                                                   required="true" value="" type="text"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label">Address</label
+            <div class="col-md-8 inputGroupContainer">
+              <div class="input-group"><span class="input-group-addon"><i
+                class="glyphicon glyphicon-home"></i></span><input [(ngModel)]="location.address" id="location.address"
+                                                                   name="location.address"
+                                                                   placeholder="Address Line 1" class="form-control"
+                                                                   required="true" value="" type="text"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label">City</label>
+            <div class="col-md-8 inputGroupContainer">
+              <div class="input-group"><span class="input-group-addon"><i
+                class="glyphicon glyphicon-home"></i></span><input [(ngModel)]="location.city" id="location.city"
+                                                                   name="location.city" placeholder="City"
+                                                                   class="form-control" required="true" value=""
+                                                                   type="text"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label">State</label>
+            <div class="col-md-8 inputGroupContainer">
+              <div class="input-group"><span class="input-group-addon"><i
+                class="glyphicon glyphicon-home"></i></span><input [(ngModel)]="location.state" id="location.state"
+                                                                   name="location.state"
+                                                                   placeholder="State/Province/Region"
+                                                                   class="form-control" required="true" value=""
+                                                                   type="text"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label">Zip</label>
+            <div class="col-md-8 inputGroupContainer">
+              <div class="input-group"><span class="input-group-addon"><i
+                class="glyphicon glyphicon-home"></i></span><input [(ngModel)]="location.zip" id="location.zip"
+                                                                   name="location.zip"
+                                                                   placeholder="Postal Code/ZIP" class="form-control"
+                                                                   required="true" value="" type="text"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label">Country</label>
+            <div class="col-md-8 inputGroupContainer">
+              <div class="input-group">
+                <span class="input-group-addon" style="max-width: 100%;"><i class="glyphicon glyphicon-list"></i></span>
+                <select class="selectpicker form-control">
+                  <option>A really long option to push the menu over the edge</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
