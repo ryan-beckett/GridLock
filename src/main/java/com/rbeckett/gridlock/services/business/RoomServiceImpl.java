@@ -46,6 +46,13 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
+    public Set<Room> findAllBySite(String site) {
+        Set<Room> rooms = new HashSet<>();
+        roomRepository.findAllBySite(site).forEach(rooms::add);
+        return rooms;
+    }
+
+    @Override
     public Room save(Room room) {
         return roomRepository.save(room);
     }

@@ -11,7 +11,12 @@
 package com.rbeckett.gridlock.repositories.business;
 
 import com.rbeckett.gridlock.model.business.Location;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.Set;
+
 public interface LocationRepository extends CrudRepository<Location, Long> {
+    @Query(value = "select country from Location l", nativeQuery = true)
+    Set<String> findAllCountries();
 }

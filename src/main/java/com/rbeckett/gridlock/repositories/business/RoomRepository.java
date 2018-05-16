@@ -11,7 +11,13 @@
 package com.rbeckett.gridlock.repositories.business;
 
 import com.rbeckett.gridlock.model.business.Room;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+
+import java.util.Set;
 
 public interface RoomRepository extends CrudRepository<Room, Long> {
+    @Query(value = "select r from Room r where lower(r.site.name) = lower(:site)")
+    Set<Room> findAllBySite(@Param("site") String site);
 }

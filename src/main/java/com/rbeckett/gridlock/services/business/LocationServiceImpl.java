@@ -39,6 +39,14 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
+    public Set<String> findAllCountries() {
+        Set<String> countries = new HashSet<>();
+        locationRepository.findAllCountries().forEach(countries::add);
+        return countries;
+    }
+
+
+    @Override
     public Location findById(Long id) {
         Optional<Location> locationOptional = locationRepository.findById(id);
         return locationOptional.orElse(null);

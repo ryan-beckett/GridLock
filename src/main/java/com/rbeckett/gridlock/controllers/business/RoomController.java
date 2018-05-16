@@ -54,6 +54,16 @@ class RoomController {
         }
     }
 
+    @GetMapping("site/{site}")
+    public Set<Room> getRoomsBySite(@PathVariable String site) {
+        try {
+            return roomService.findAllBySite(site);
+        } catch (DataAccessException ex) {
+            log.debug(ex.getMessage());
+            return null;
+        }
+    }
+
     @PostMapping(value = "")
     public ResponseEntity createRoom(@RequestBody Room room) {
         try {

@@ -44,6 +44,16 @@ class LocationController {
         }
     }
 
+    @GetMapping("countries")
+    public Set<String> getCountries() {
+        try {
+            return locationService.findAllCountries();
+        } catch (DataAccessException ex) {
+            log.debug(ex.getMessage());
+            return null;
+        }
+    }
+
     @GetMapping("id/{id}")
     public ResponseEntity getLocationById(@PathVariable Long id) {
         try {

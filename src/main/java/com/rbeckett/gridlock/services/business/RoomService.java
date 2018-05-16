@@ -13,6 +13,8 @@ package com.rbeckett.gridlock.services.business;
 import com.rbeckett.gridlock.model.business.Room;
 import com.rbeckett.gridlock.services.BaseService;
 
-public interface RoomService extends BaseService<Room> {
+import java.util.Set;
 
+public interface RoomService extends BaseService<Room> {
+    Set<Room> findAllBySite(String site);
 }

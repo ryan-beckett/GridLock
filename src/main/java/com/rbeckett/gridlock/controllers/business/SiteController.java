@@ -54,6 +54,16 @@ class SiteController {
         }
     }
 
+    @GetMapping("country/{country}")
+    public Set<Site> getSitesByCountry(@PathVariable String country) {
+        try {
+            return siteService.findAllByCountry(country);
+        } catch (DataAccessException ex) {
+            log.debug(ex.getMessage());
+            return null;
+        }
+    }
+
     @PostMapping(value = "")
     public ResponseEntity createSite(@RequestBody Site site) {
         try {

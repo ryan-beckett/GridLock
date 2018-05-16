@@ -44,6 +44,14 @@ public class SiteServiceImpl implements SiteService {
         return siteOptional.orElse(null);
     }
 
+
+    @Override
+    public Set<Site> findAllByCountry(String country) {
+        Set<Site> sites = new HashSet<>();
+        siteRepository.findAllByCountry(country).forEach(sites::add);
+        return sites;
+    }
+
     @Override
     public Site save(Site site) {
         return siteRepository.save(site);

@@ -13,6 +13,8 @@ package com.rbeckett.gridlock.services.business;
 import com.rbeckett.gridlock.model.business.Location;
 import com.rbeckett.gridlock.services.BaseService;
 
-public interface LocationService extends BaseService<Location> {
+import java.util.Set;
 
+public interface LocationService extends BaseService<Location> {
+    Set<String> findAllCountries();
 }
