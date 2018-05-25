@@ -21,13 +21,13 @@ public class ServerDeviceGenerator extends RackableDeviceGenerator implements Ge
             "Supermicro AS-2022G", "Asus RS100-E9-P12", "PowerEdge T330", "Dell Server r730",
             "HP GridEdge 4550", "Cisco Blade I930"};
     private static final String[] SERVER_DEVICES_IMG_URLS = {
-            "https://www.supermicro.com/products/system/1U/5015/SYS-5015A-EHF-D525.cfm",
-            "https://www.supermicro.com/aplus/system/2u/2022/as-2022g-urf4_.cfm",
-            "http://www.taknet.com.my/products/asus/rs100-e9-p12/",
-            "http://www.router-switch.com/dell-poweredge-t330-xeon-e3-1240-v5-32gb-2tb-server.html",
-            "http://www.itpro.co.uk/server/23980/dell-poweredge-r730-review",
-            "https://www.indiamart.com/proddetail/hp-proliant-dl20-gen-9-server-866233-375-13489239973.html",
-            "https://www.cisco.com/c/en/us/products/servers-unified-computing/ucs-b-series-blade-servers/index.html"};
+            "https://www.supermicro.com/products/system/1U/5015/SYS-5015A-EHF-D525.jpg",
+            "https://www.supermicro.com/a_images/products/Aplus/System/2U/AS-2022G-URF4__spec.jpg",
+            "http://www.taknet.com.my/wp-content/uploads/2017/09/try7.jpg",
+            "http://img.router-switch.com/media/wysiwyg/Dell-Products/Dell-Server/Dell-PowerEdge-T330-Server/dell-poweredge-t330-server_Front_and_Back_Panel.jpg",
+            "http://cdn1.itpro.co.uk/sites/itpro/files/styles/article_main_wide_image/public/1/17//r730_6_x_4.jpg",
+            "https://4.imimg.com/data4/DL/UF/MY-256711/hp-server-dl20-500x500.jpg",
+            "https://www.cisco.com/c/en/us/products/servers-unified-computing/ucs-b-series-blade-servers/index/_jcr_content/Grid/subcategory_atl/layout-subcategory-atl/blade/bladeContents/halves_5f6e/H-Half-1/tile_9d06/image.img.jpg/1499460535159.jpg"};
     private final List<ServerDevice> serverDevices = new ArrayList<>();
     private final ServerDeviceService serverDeviceService;
     private final RackService rackService;
