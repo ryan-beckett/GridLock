@@ -20,6 +20,11 @@ public class PatchPanelGenerator extends RackableDeviceGenerator implements Gene
     private static final String[] PATCH_PANELS = {"C2G 03859 24-Port",
             "TrendNet TC-P16C5E 16-Port", "Monoprice 48-port Cat 6 Patch",
             "StarTech 240-Port MPO", "C2G 48-Port Cat 5", "StarTech LC-196"};
+    private static final String[] PATCH_PANELS_IMG_URLS = {
+            "https://s15.postimg.cc/ojiub7i9z/611441_CCH_01_U.jpg",
+            "https://s15.postimg.cc/lcoarld9j/corning-pretium-edge8-4u-patch-panel-housing-rack--d1379b188522e.jpg",
+            "https://s15.postimg.cc/3ze0cqa8n/download_1.jpg"
+    };
     private static final Integer[] PORTS = {16, 24, 48, 96, 298};
     private final List<PatchPanel> patchPanels = new ArrayList<>();
     private final PatchPanelService patchPanelService;
@@ -37,6 +42,7 @@ public class PatchPanelGenerator extends RackableDeviceGenerator implements Gene
             final PatchPanel patchPanel = new PatchPanel();
             patchPanel.setType(AssetType.PATCH_PANEL);
             patchPanel.setModel(PATCH_PANELS[i % PATCH_PANELS.length]);
+            patchPanel.setImageURL(PATCH_PANELS_IMG_URLS[i % PATCH_PANELS_IMG_URLS.length]);
             patchPanel.setPortType(dataFactory.getItem(PortType.values()));
             patchPanel.setTotalNumberOfPorts(dataFactory.getItem(PORTS));
             generate(patchPanel, rackService, generators);

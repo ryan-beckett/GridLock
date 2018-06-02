@@ -17,6 +17,10 @@ public class MainFrameGenerator extends AssetGenerator implements Generator<Main
     private static final DataFactory dataFactory = new DataFactory();
     private static final String[] MAIN_FRAMES = {"IBM Z9 MainFrame", "IBM Z10 MainFrame",
             "DEC VAX", "Siemens 24M-Series", "Hitachi SAN V10 Tape Series"};
+    private static final String[] MAIN_FRAMES_IMG_URLS = {
+            "https://s15.postimg.cc/norpbfsrf/z890.jpg",
+            "https://s15.postimg.cc/phulze3jv/ibm-mainframe.jpg"
+    };
     private final List<MainFrame> mainFrames = new ArrayList<>();
     private final MainFrameService mainFrameService;
 
@@ -30,6 +34,7 @@ public class MainFrameGenerator extends AssetGenerator implements Generator<Main
             final MainFrame mainFrame = new MainFrame();
             mainFrame.setType(AssetType.MAIN_FRAME);
             mainFrame.setModel(MAIN_FRAMES[i % MAIN_FRAMES.length]);
+            mainFrame.setImageURL(MAIN_FRAMES_IMG_URLS[i % MAIN_FRAMES_IMG_URLS.length]);
             generate(mainFrame, generators);
             AppDataGenerator.RoomGridLocationPair pr = AppDataGenerator.getNextRandomRoomAndGridLocation();
             mainFrame.setRoom(pr.room);
