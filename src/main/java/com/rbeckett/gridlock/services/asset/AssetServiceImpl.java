@@ -93,8 +93,14 @@ public class AssetServiceImpl implements AssetService {
         QAsset asset = QAsset.asset;
         query = query.from(asset);
         String id = parameterMap.get("id")[0];
-        if (!id.isEmpty())
-            query = query.where(asset.id.eq(Long.parseLong(id)));
+        if (!id.isEmpty()) {
+            try {
+                query = query.where(asset.id.eq(Long.parseLong(id)));
+            } catch (NumberFormatException e) {
+                log.info("Asset API request has unparsable asset ID: " + id);
+                return new HashSet<>();
+            }
+        }
         String name = parameterMap.get("name")[0];
         if (!name.isEmpty())
             query = query.where(asset.name.containsIgnoreCase(name));
