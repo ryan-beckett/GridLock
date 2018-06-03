@@ -14,6 +14,8 @@ public class RackableDeviceGenerator extends AssetGenerator {
 
     private static final DataFactory dataFactory = new DataFactory();
     private static final Integer[] U_HEIGHTS = {1, 2, 4};
+    private static final String[] ZONES = {"Internet", "DMZ", "Intranet", "Dev Test", "B2B", "Remote", "High Risk",
+            "Audit", "Management"};
 
     protected void generate(RackableDevice rackableDevice, RackService rackService, Generator... generators) {
         super.generate(rackableDevice, generators);
@@ -35,6 +37,7 @@ public class RackableDeviceGenerator extends AssetGenerator {
                         rackableDevice.setULocation(uLocation);
                         rackableDevice.setGridLocation(rack.getGridLocation());
                         rackableDevice.setRoom(rack.getRoom());
+                        rackableDevice.setZone(dataFactory.getItem(ZONES));
                         rack = rackService.save(rack);
                         updateGeneratedRackList(generators[5].getResults(), rack);
                         placed = true;

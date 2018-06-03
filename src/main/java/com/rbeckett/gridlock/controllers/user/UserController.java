@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
+//TODO: hash user password
+
 @Lazy
 @CrossOrigin(origins = "*", maxAge = 3600)
 @Slf4j
