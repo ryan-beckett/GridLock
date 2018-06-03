@@ -21,9 +21,9 @@ public class RackGenerator extends AssetGenerator implements Generator<Rack> {
             "https://s15.postimg.cc/gwwoulebb/Z0000027246.jpg",
             "https://s15.postimg.cc/lvk793fjb/NPNB-3108-3-024-22_01.jpg",
             "https://s15.postimg.cc/5kk3csxwn/XR-_NRE2-25_U-_US-2.jpg"};
+    private final int[] RACK_HEIGHTS = {48, 24, 12};
     private final List<Rack> racks = new ArrayList<>();
     private final RackService rackService;
-    private final int RACK_HEIGHT = 48;
 
     public RackGenerator(final RackService rackService) {
         this.rackService = rackService;
@@ -36,7 +36,7 @@ public class RackGenerator extends AssetGenerator implements Generator<Rack> {
             rack.setType(AssetType.RACK);
             rack.setModel(RACK_NAMES[i % RACK_NAMES.length]);
             rack.setImageURL(RACK_IMG_URLS[i % RACK_IMG_URLS.length]);
-            rack.setUHeight(RACK_HEIGHT);
+            rack.setUHeight(RACK_HEIGHTS[i % RACK_HEIGHTS.length]);
             generate(rack, generators);
             AppDataGenerator.RoomGridLocationPair pr = AppDataGenerator.getNextRandomRoomAndGridLocation();
             rack.setRoom(pr.room);
