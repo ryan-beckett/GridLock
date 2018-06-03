@@ -35,6 +35,9 @@ public class LocationGenerator implements Generator<Location> {
             if (location.getCountry().equals("US")) {
                 location.setZip(dataFactory.getNumberText(5));
                 location.setState(STATES[(j++) % STATES.length]);
+            } else {
+                location.setZip(dataFactory.getRandomChars(5, 8));
+                location.setState(dataFactory.getStreetName());
             }
             locations.add(locationService.save(location));
         }
