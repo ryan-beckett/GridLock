@@ -8,14 +8,11 @@ import com.rbeckett.gridlock.model.business.Room;
 import com.rbeckett.gridlock.model.business.ServiceContract;
 import org.fluttercode.datafactory.impl.DataFactory;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.Random;
 
 public class AssetGenerator {
 
     private static final DataFactory dataFactory = new DataFactory();
-    private static final DecimalFormat df = new DecimalFormat("#.##");
     private static final float MIN_COST = 1000f, MAX_COST = 100000f;
     private static final int MIN_DESC_LEN = 20, MAX_DESC_LEN = 100;
     private static final int PO_LEN = 10;
@@ -23,10 +20,6 @@ public class AssetGenerator {
     private static final int PRT_NUM_LEN = 6;
     private static int numRacks, numDesktopDevices, numMainFrames, numServerDevices, numStorageFrames,
             numNetworkDevices, numStorageDevices, numPatchPanels;
-
-    static {
-        df.setRoundingMode(RoundingMode.CEILING);
-    }
 
     protected void generate(Asset asset, Generator... generators) {
         final Random random = new Random();
@@ -38,8 +31,7 @@ public class AssetGenerator {
         asset.setSerial(dataFactory.getRandomChars(SERIAL_LEN));
         asset.setPartNumber(dataFactory.getRandomChars(PRT_NUM_LEN));
         asset.setDescription(dataFactory.getRandomText(MIN_DESC_LEN, MAX_DESC_LEN));
-        String val = df.format(MIN_COST + (random.nextDouble() * (MAX_COST - MIN_COST)));
-        asset.setCost(Double.parseDouble(val));
+        asset.setCost(MIN_COST + (random.nextDouble() * (MAX_COST - MIN_COST)));
         asset.setStatus(dataFactory.getItem(AssetStatus.values()));
         switch (asset.getType()) {
             case RACK:
