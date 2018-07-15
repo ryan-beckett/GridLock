@@ -32,4 +32,9 @@ public class GridLockApplicationTests {
     public void mySecondTest() {
 
     }
+
+    @Test
+    public void myThirdTest() {
+        
+    }
 }
