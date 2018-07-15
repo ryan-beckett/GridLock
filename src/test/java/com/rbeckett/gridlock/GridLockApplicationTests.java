@@ -27,4 +27,9 @@ public class GridLockApplicationTests {
     public void myFirstTest() {
 
     }
+
+    @Test
+    public void mySecondTest() {
+
+    }
 }
